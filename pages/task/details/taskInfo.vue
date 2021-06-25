@@ -1,10 +1,38 @@
 <template>
+	
 	<view class="tasks">
-		<text>订单详情</text>
-		<view class="tasks_list" v-for="task in tasks" :key="task.id">
+		
+		<view class="title">
+			<text>订单信息</text>
+			<text>{{tasks.entPlan}}</text>
+		</view>
+	
+		<view class="info">
 			<view>
-				<text>{{task.name}}</text>
+				<text>{{tasks.entType}}</text>
 			</view>
+			
+			<text>{{tasks.entData}}</text>
+		</view>
+		
+		<view class="money">
+			<text>{{tasks.gmtMoney}}</text>
+		</view>
+		
+		<view class="time">
+			<view>
+				<text>发布时间</text>
+				<text>{{tasks.gmtCreate}}</text>
+			</view>
+			<view>
+				<text>截止时间</text>
+				<text>{{tasks.gmtEnd}}</text>
+			</view>
+			
+		</view>
+		
+		<view class="btn">
+			<button type="default">接手订单</button>
 		</view>
 	</view>
 	
@@ -14,7 +42,8 @@
 	export default {
 		data() {
 			return {
-				tasks:[]
+				tasks:{},
+				btn_dis: true
 			}
 		},
 		onLoad(opitons) {
@@ -22,10 +51,13 @@
 		},
 		methods: {
 			getTaskById(id) {
-				uni.request({
-					url: "/getTaskById?id=" + id
-				}).then(res => {
-					this.tasks = res.data
+				console.log(id)
+				this.$myRequest({
+					url: "/toEntrustInfo?id=" + id,
+					success: res => {
+						console.log(res)
+						this.tasks = res.data.entrust
+					}
 				})
 			}
 		}
@@ -34,9 +66,47 @@
 
 <style lang="scss">
 	.tasks{
-		padding: 10rpx 20rpx;
-		.tasks_list{
+		margin: 30rpx 30rpx;
+		.title{
 			
+			text:nth-child(2){
+				position: absolute;
+				right: 30rpx;
+				font-size: 20rpx;
+				color: #007AFF;
+			}
+		}
+		.info{
+			view{
+				width: 40rpx;
+				height: 80rpx;
+			}
+			text:nth-child(1){
+				background: #007AFF;
+				color: #eee;
+				font-size: 25rpx;
+				line-height: 30rpx;
+			}
+			text:nth-child(2){
+				padding-left: 30rpx;
+			}
+		}
+		.money{
+			
+		}
+		.time{
+			
+		}
+		.btn{
+			color: #FFFFFF;
+			font-size: 34rpx;
+			width:750rpx;
+			height:auto;
+			border-radius:50upx;
+			line-height: 100upx;
+			text-align: center;
+			position: absolute;
+			bottom: 0rpx;
 		}
 	}
 </style>

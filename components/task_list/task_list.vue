@@ -9,7 +9,7 @@
 			<view class="recommend_tasks_list_task_price">
 				<text>{{task.entMoney | showPrice}}</text>
 				<text>{{task.entMoney | showPrice}}</text>
-				<text>{{task.entState}}</text>
+				<text>{{task.entPlan}}</text>
 			</view>
 		</view>
 	</view>

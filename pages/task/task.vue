@@ -32,40 +32,39 @@
 		},
 		onLoad() {
 			this.getTasks()
-
 		},
 		methods: {
 			getTasks(callback) {
-        this.$myRequest({
-          url: "/getEnts?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
-          method: "GET",
-          success: (res) => {
-            console.log(res)
-            this.hotTasks = [...this.hotTasks, ...res.data.data]
-            this.total = res.data.total
-            callback && callback()
-          }
-        })
-      },
+				this.$myRequest({
+					url: "/getEnts?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
+					method: "GET",
+					success: (res) => {
+						console.log(res)
+						this.hotTasks = [...this.hotTasks, ...res.data.data]
+						this.total = res.data.total
+						callback && callback()
+					}
+				})
+			},
 			moreTask() {
-        if (this.total <= (this.pageIndex * this.pageSize)) {
-          this.more_dis = false
-          this.over_dis = true
-          return
-        }
-        this.pageIndex++
-        this.getTasks()
-      },
+				if (this.total <= (this.pageIndex * this.pageSize)) {
+					this.more_dis = false
+					this.over_dis = true
+					return
+				}
+				this.pageIndex++
+				this.getTasks()
+			},
 			/* 触底触发 */
 			onReachBottom() {
-        /* if (this.hotTasks.length < this.pageIndex * 10) { */
-        if (this.total <= (this.pageIndex * this.pageSize)) {
-          this.more_dis = false
-          return this.over_dis = true
-        }
-        this.pageIndex++
-        this.getTasks()
-      },
+				/* if (this.hotTasks.length < this.pageIndex * 10) { */
+				if (this.total <= (this.pageIndex * this.pageSize)) {
+					this.more_dis = false
+					return this.over_dis = true
+				}
+				this.pageIndex++
+				this.getTasks()
+			},
 			/* 下拉刷新 */
 			onPullDownRefresh() {
 				this.pageIndex = 1
@@ -91,24 +90,24 @@
 		text-align: center;
 		border-bottom: 1rpx solid #eee;
 
-    .cond-item {
-      width: 33%;
-      height: auto;
-      font-size: 30 rpx;
-      line-height: 80 rpx;
-    }
+		.cond-item {
+			width: 33%;
+			height: auto;
+			font-size: 30 rpx;
+			line-height: 80 rpx;
+		}
 
-  }
+	}
 
-  .btn {
-    margin-left: 295 rpx;
-  }
+	.btn {
+		margin-left: 295rpx;
+	}
 
-  .over {
-    width: 100%;
-    height: 50 rpx;
-    text-align: center;
-    line-height: 50 rpx;
-    font-size: 28 rpx;
-  }
+	.over {
+		width: 100%;
+		height: 50 rpx;
+		text-align: center;
+		line-height: 50 rpx;
+		font-size: 28 rpx;
+	}
 </style>

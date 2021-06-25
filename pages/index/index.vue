@@ -4,7 +4,7 @@
 		<!-- 轮播图 -->
 		<swiper indicator-dots circular autoplay>
 			<swiper-item v-for="img in rotationImgArr" :key="img.id">
-				<image :src="img" mode=""></image>
+				<image :src="img"></image>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -24,8 +24,7 @@
 			}
 		},
 		onLoad() {
-			/* 获取轮播图数据 */
-			this.getRotationImg()
+			
 		},
 		methods: {
 			/* 获取轮播图数据 */
