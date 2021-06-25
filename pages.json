@@ -1,0 +1,181 @@
+{
+	// uni-app 进行全局配置，决定页面文件的路径、窗口样式、原生的导航栏、底部的原生tabbar 等。
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "校园委托管理" ,//  当前页面下的title
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/task/task",
+			"style": {
+				"navigationBarTitleText": "单子"
+			}
+		},
+		{
+			"path": "pages/message/message",
+			"style": {
+				"navigationBarTitleText": "信息"
+			}
+		},
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "我的空间"
+			}
+		},
+		{
+			"path": "pages/aboutUs/aboutUs",
+			"style": {
+				"navigationBarTitleText": "关于我们"
+			}
+		},
+		{
+			"path": "pages/safe/safe",
+			"style": {
+				"navigationBarTitleText": "安全中心"
+			}
+		},
+		{
+			"path": "pages/home/myself/myself",
+			"style": {
+				"navigationBarTitleText": "账号设置"
+			}
+		},
+		{
+			"path": "pages/message/taskStatus/taskStatus",
+			"style": {
+				"navigationBarTitleText": "订单状态"
+			}
+		},
+		{
+			"path": "pages/message/systemMsg/systemMsg",
+			"style": {
+				"navigationBarTitleText": "系统消息"
+			}
+		},
+		{
+			"path": "pages/message/activityCenter/activityCenter",
+			"style": {
+				"navigationBarTitleText": "活动中心"
+			}
+		},
+		{
+			"path": "pages/task/details/taskInfo",
+			"style": {
+				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/home/currentMenu/attention/attention",
+			"style": {
+				"navigationBarTitleText": "我的关注"
+			}
+		},
+		{
+			"path": "pages/home/currentMenu/unattention/unattention",
+			"style": {
+				"navigationBarTitleText": "被关注"
+			}
+		},
+		{
+			"path": "pages/home/currentMenu/footPrints/footPrints",
+			"style": {
+				"navigationBarTitleText": "足迹"
+			}
+		},
+		{
+			"path": "pages/home/currentMenu/moneyCheat/moneyCheat",
+			"style": {
+				"navigationBarTitleText": "代金券"
+			}
+		},
+		{
+			"path":"pages/home/myself/nickNameUpd/nickNameUpd",
+			"style": {
+				"navigationBarTitleText": "修改昵称"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path":"pages/backPwd/backPwd",
+			"style":{
+				"navigationBarTitleText":"找回密码"
+			}
+		}
+	],
+	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
+	"globalStyle": {
+		"navigationBarTextStyle": "white", //  导航字体颜色   仅支持black / white
+		"navigationBarTitleText": "校园委托管理", //  导航标题      页面的title会覆盖全局标题
+		"navigationBarBackgroundColor": "#b50e03" //  导航栏bgcolor
+	},
+	// 下面操作菜单
+	"tabBar": {
+		"color": "#000000",   //  未选中tab字体颜色
+		"selectedColor":"#b50e03",   // 选中tab字体颜色
+		"borderStyle": "black",      // tab上边界横线的颜色 支持 white / black
+		"list": [ // 数组 2-5个
+			{
+				"text": "发单",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbarIcon/index.png",
+				"selectedIconPath": "static/tabbarIcon/select-index.png"
+			},
+			{
+				"text": "接单",
+				"pagePath": "pages/task/task",
+				"iconPath": "static/tabbarIcon/task.png",
+				"selectedIconPath": "static/tabbarIcon/select-task.png"
+			},
+			{
+				"text": "+",
+				"pagePath": "pages/home/home",
+				"iconPath": "static/tabbarIcon/home.png",
+				"selectedIconPath": "static/tabbarIcon/select-home.png"
+			},
+			{
+				"text": "信息",
+				"pagePath": "pages/message/message",
+				"iconPath": "static/tabbarIcon/message.png",
+				"selectedIconPath": "static/tabbarIcon/select-message.png"
+			},
+/* 			{
+				"text": "社区",
+				"pagePath": "pages/community/community",
+				"iconPath": "static/tabbarIcon/community-icon.png",
+				"selectedIconPath": "static/tabbarIcon/community-icon.png"
+			}, */
+			{
+				"text": "我的",
+				"pagePath": "pages/home/home",
+				"iconPath": "static/tabbarIcon/home.png",
+				"selectedIconPath": "static/tabbarIcon/select-home.png"
+			}
+		]
+	}
+	//  启动配置
+	/* "condition": {
+		"current": 0,      //  list的索引
+		"list": [
+			{
+				"name": "详情页",
+				"path": "",
+				"query": "id=80"
+			}
+		]
+	} */
+}
