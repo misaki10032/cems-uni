@@ -14,7 +14,6 @@
 			<view v-if="msgs.length === 0">
 				<text>{{msg}}</text>
 			</view>
-			<view>a11111111111</view>
 		</view>
 	</view>
 

@@ -1,15 +1,15 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<image src="/static/logo.png"></image>
+			<image src="/static/default/default.jpg"></image>
 		</view>
 		<view class="list">
 			<view class="list-call">
-				<image class="img" src="/static/logo.png"></image>
+				<image class="img" src="/static/login/phone.png"></image>
 				<input class="biaoti" v-model="mobile" type="number" maxlength="11" placeholder="输入手机号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/logo.png"></image>
+				<image class="img" src="/static/login/pwd-check.png"></image>
 				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="输入密码" password="true" />
 			</view>
 			
@@ -48,13 +48,15 @@
 			},
 		    login() {
 				// console.log(md5(this.password + 'app'));return;
-				if (this.mobile.length != 11) {
-				     uni.showToast({
-				        icon: 'none',
-				        title: '手机号不正确'
-				    });
-          return;
-        }
+				
+			var phone = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+			if (!phone.test(this.mobile)) {
+				uni.showToast({
+					icon: 'none',
+					title: '手机号不正确'
+				});
+				return;
+			}
           if (this.password.length < 2) {
             uni.showToast({
               icon: 'none',

@@ -1,48 +1,37 @@
 <template>
 	<view class="content">
 		<view class="logo">
-			<image src="../../static/logo.png"></image>
+			<image src="../../static/default/default.jpg"></image>
 		</view>
-
 		<view class="from">
 			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
+				<image class="img" src="../../static/login/nick.png"></image>
 				<input class="input" v-model="username" type="text" placeholder="昵称" />
 			</view>
 			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
+				<image class="img" src="../../static/login/phone.png"></image>
 				<input class="input" v-model="mobile" type="number" maxlength="11" placeholder="手机号" />
 			</view>
 			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
+				<image class="img" src="../../static/login/pwd.png"></image>
 				<input class="input" v-model="password" type="text" maxlength="32" placeholder="登录密码" :password="!showPassword" />
 				<image class="img" :src="showPassword?'/static/image/open.png':'/static/image/close.png'" @tap="pwd"></image>
 			</view>
 			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
+				<image class="img" src="../../static/login/pwd-check.png"></image>
 				<input class="input" v-model="repassword" type="text" maxlength="32" placeholder="确认登录密码" :password="!showrePassword" />
 				<image class="img" :src="showrePassword?'/static/image/open.png':'/static/image/close.png'" @tap="repwd"></image>
 			</view>
 			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
-				<input class="input" v-model="pay_pwd" type="text" maxlength="32" placeholder="支付密码" :password="!showpayPassword" />
-				<image class="img" :src="showpayPassword?'/static/image/open.png':'/static/image/close.png'" @tap="paypwd"></image>
+				<image class="img" src="../../static/login/email.png"></image>
+				<input class="input" v-model="email" type="text" maxlength="32" placeholder="请输入邮箱"/>
+				<image class="img" :src="showrePassword?'/static/image/open.png':'/static/image/close.png'" @tap="repwd"></image>
 			</view>
-			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
-				<input class="input" v-model="repay_pwd" type="text" maxlength="32" placeholder="确认支付密码" :password="!showrepayPassword" />
-				<image class="img" :src="showrepayPassword?'/static/image/open.png':'/static/image/close.png'" @tap="repaypwd"></image>
-			</view>
-			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
+			<!-- <view class="input-controls">
+				<image class="img" src="../../static/login/code.png"></image>
 				<input class="input" v-model="code" type="number" maxlength="6" placeholder="验证码" />
 				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}</view>
-			</view>
-			<view class="input-controls">
-				<image class="img" src="../../static/logo.png"></image>
-				<input class="input" v-model="p_mobile" type="text" maxlength="11" placeholder="推荐人手机号码                      (非必填)" />
-			</view>
-
+			</view> -->
 		</view>
 
 		<view class="btn" hover-class="btn-hover" @tap="reg">
@@ -50,7 +39,7 @@
 		</view>
 
 		<view class="txt">
-			<image @tap="proxyCheck" :src="proxy==true ? '/static/proxy/disagree.png' : '/static/proxy/agree.png'"></image> 
+			<image @tap="proxyCheck" :src="proxy==true ? '/static/proxy/agree.png' : '/static/proxy/disagree.png'"></image> 
 			<navigator url="blog?id=1" open-type="navigate">我同意《软件用户协议》</navigator>
 		</view>
 	</view>
@@ -72,13 +61,13 @@
 				username: '',
 				mobile: '',
 				password: '',
+				repassword: '',
 				code: '',
 				p_mobile: '',
-				proxy: true,
+				proxy: false,
 				showPassword: false,
 				showrePassword: false,
-				showpayPassword: false,
-				showrepayPassword: false,
+				email: "",
 				second: 0
 			};
 		},
@@ -102,22 +91,16 @@
 			repwd() {
 				this.showrePassword = !this.showrePassword
 			},
-			paypwd() {
-				this.showpayPassword = !this.showpayPassword
-			},
-			repaypwd() {
-				this.showrepayPassword = !this.showrepayPassword
-			},
 			proxyCheck() {
 				this.proxy = !this.proxy;
 			},
-			getcode() {
+			/* getcode() {
 				if (this.second > 0) {
 					return;
 				}
 				this.second = 60;
-				uni.request({
-					url: this.$url + '/api/v1.sms/getsms', // 获取短信接口
+				this.$myRequest({
+					url: '/userResiger', // 获取短信接口
 					data: {
 						mobile: this.mobile,
 						type:1
@@ -144,7 +127,7 @@
 						}
 					}
 				});
-			},
+			}, */
 			reg() {
 				if (this.username == "" || this.username == null || this.username == undefined) {
 					uni.showToast({
@@ -153,6 +136,50 @@
 					});
 					return;
 				}
+				var phone = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/; 
+				if (!phone.test(this.mobile)) {
+					uni.showToast({
+						icon: 'none',
+						title: '手机号不正确'
+					});
+					return;
+				}
+				if (this.password.length < 2) {
+					uni.showToast({
+						icon: 'none',
+						title: '密码长度必须2-20位'
+					});
+					return;
+				}
+				if(this.repassword.length == 0){
+					uni.showToast({
+						title: "请输入确认密码",
+						icon: "none"
+					})
+					return;
+				}
+				if (this.repassword != this.password) {
+					uni.showToast({
+						icon: 'none',
+						title: '密码不一致'
+					});
+					return;
+				}
+				var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				if(!myreg.test(this.email)){
+					uni.showToast({
+						title: "请输入格式正确的邮箱",
+						icon: "none"
+					})
+					return;
+				}
+				/* if (this.code == "" || this.code == null || this.code == undefined) {
+					uni.showToast({
+						icon: 'none',
+						title: '请输入验证码'
+					});
+					return;
+				} */
 				if (this.proxy == false) {
 					uni.showToast({
 						icon: 'none',
@@ -160,55 +187,32 @@
 					});
 					return;
 				}
-				if (this.mobile.length != 11) {
-					uni.showToast({
-						icon: 'none',
-						title: '手机号不正确'
-					});
-					return;
-				}
-				if (this.password.length < 6) {
-					uni.showToast({
-						icon: 'none',
-						title: '密码长度必须6-20位'
-					});
-					return;
-				}
-				if (this.username == "" || this.username == null || this.username == undefined) {
-					uni.showToast({
-						icon: 'none',
-						title: '请输入验证码'
-					});
-					return;
-				}
-				uni.request({
-					url: global.host +'/api/v1.login/reg',
+				this.$myRequest({
+					url: '/userResiger',
 					data: {
-						username: this.username,
-						mobile: this.mobile,
-						password: this.password, 
-						repassword: this.repassword,
-						pay_pwd: this.pay_pwd,
-						repay_pwd: this.repay_pwd,
-						code: this.code,
-						p_mobile: this.p_mobile
+						userPname: this.username,
+						userPhone: this.mobile,
+						userPwd: this.password, 
+						userEmail: this.email
+						/* code: this.code */
 					},
 					method: 'POST',
 					dataType: 'json',
 					success: (res) => {
 						console.log(res);
-						if (res.data.code != 1) {
+						if (res.data.code == 200) {
 							uni.showToast({
 								title: res.data.msg,
 								icon: 'none'
 							});
-						} else {
-							uni.showToast({
-								title: res.data.msg
-							});
 							setTimeout(function() {
 								uni.navigateBack();
 							}, 1500)
+						} else {
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							});
 						}
 					}
 				});

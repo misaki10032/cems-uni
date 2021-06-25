@@ -5,7 +5,7 @@
 				<view class="box">
 					<view class="box-hd">
 						<view class="avator">
-							<img @click="toMyself" src="../../static/logo.png">
+							<img @click="toMyself" src="/static/pics/2.jpg">
 						</view>
 						<view class="phone-number">{{user.userPname}}</view>
 						<view class="role">{{user.userRole}}</view>
@@ -27,9 +27,8 @@
 						<text>></text>
 					</view>
 				</view>
-				<view class="li">
-					<view @click="logOut">
-						退出
+				<view class="li" @click="logOut">
+					<view>退出
 						<text>></text>
 					</view>
 				</view>
@@ -107,10 +106,25 @@
 		},
 		methods: {
 			logOut(){
-				uni.clearStorageSync();
-				uni.redirectTo({
-					url: '/pages/login/login'
+				uni.showModal({
+					title: "温馨提示",
+					content: "您确定要退出吗",
+					showCancel: true,
+					confirmColor: "#DD524D",
+					success: res => {
+						if(res.confirm){
+							uni.clearStorageSync();
+							uni.redirectTo({
+								url: '/pages/login/login'
+							})
+						}
+						if(res.cancel){
+							return
+						}
+					},
+					
 				})
+				
 			},
 			toTask() {
 				uni.switchTab({
@@ -185,7 +199,7 @@
 
 				width: 33.3%;
 				text-align: center;
-				margin-top: 40rpx;
+				margin-top: 15rpx;
 
 				view {
 					margin: 10rpx auto;
@@ -221,7 +235,7 @@
 			}
 			.role {
 				text-align: center;
-				font-size: 16rpx;
+				font-size: 20rpx;
 				color: #767676;
 			}
 		}
@@ -301,6 +315,7 @@
 				right: 30rpx;
 				color: #ccc;
 			}
+			
 			&.noborder {
 				border-bottom: 0
 			}
