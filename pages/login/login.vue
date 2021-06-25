@@ -53,29 +53,36 @@
 				        icon: 'none',
 				        title: '手机号不正确'
 				    });
-				    return;
-				}
-		        if (this.password.length < 2) {
-		            uni.showToast({
-		                icon: 'none',
-		                title: '密码不正确'
-		            });
-		            return;
-		        }
+          return;
+        }
+          if (this.password.length < 2) {
+            uni.showToast({
+              icon: 'none',
+              title: '密码不正确'
+            });
+            return;
+          }
 
-				uni.request({
-				    url: 'http://192.168.31.227:9999/uniApp/uniAppLogin',
-				    data: {
-						num:this.mobile,
-						pwd:this.password
-					},
-					method: 'POST',
-					dataType:'json',
-				    success: (res) => {
-						if(res.data.code!=200){
-							uni.showToast({title:res.data.msg,icon:'none'});
-						}else{
-							var token = uni.getStorageSync('token');
+          this.$myRequest({
+            url: '/uniAppLogin',
+            data: {
+              num: this.mobile,
+              pwd: this.password
+            },
+            method: 'POST',
+            dataType: 'json',
+            success: (res) => {
+              console.log(res.data)
+              if (res.data.code != 200) {
+                var msg = "";
+                if (res.data.msg == null || res.data.msg == "") {
+                  msg = "服务器异常"
+                } else {
+                  msg = res.data.msg;
+                }
+                uni.showToast({title: msg, icon: 'none'});
+              } else {
+                var token = uni.getStorageSync('token');
 							console.log(token);
 							uni.setStorageSync('token',token);
 							uni.setStorageSync('loginUser',res.data.loginUser);
