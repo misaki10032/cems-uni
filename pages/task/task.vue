@@ -1,8 +1,21 @@
 <template>
 	<view>
-		<view class="condition">
-      <view v-for="(item,index) in condition" :key="index" class="cond-item">{{ item }}</view>
-    </view>
+
+		<view class="cond">
+			<view class="condition">
+				<picker @change="bindPickerChange" @click="isFlag()" @cancel="isFlag" :value="index" :range="array">
+					<view class="uni-input">{{array[index]}}</view>
+				</picker>
+				<image :src="flag == true ? '/static/search/up.png' : '/static/search/on.png'" mode=""></image>
+				<text>{{total}}条</text>
+			</view>
+			
+			<view class="btnsarch">
+				 <input type="text"  placeholder="快递/作业" v-model="text">
+				 <button type="default" @click="searchTasks">搜索</button>
+			</view>
+	
+		</view>
 
 		<tasks :hotTasks="hotTasks"></tasks>
 		<button class="btn" size="mini" type="default" @click="moreTask" v-if="more_dis">加载更多</button>
@@ -21,16 +34,19 @@
 				pageSize: 8,
 				over_dis: false,
 				more_dis: true,
+				flag: true,
+				text: "",
 				total: 0,
-				condition: [
-					"安卓",
-					"排序",
-					"筛选"
-				],
-				hotTasks: []
+				hotTasks: [],
+				array: ['全部', '已被接', '可接单', '已完成'],
+				index: 0
 			}
 		},
-		onLoad() {
+		onShow() {
+			this.pageIndex = 1
+			this.hotTasks = []
+			this.more_dis = true
+			this.over_dis = false
 			this.getTasks()
 		},
 		methods: {
@@ -76,6 +92,56 @@
 						uni.stopPullDownRefresh()
 					})
 				}, 1000)
+			},
+			isFlag() {
+				this.flag = !this.flag
+			},
+			bindPickerChange (res) {
+				this.isFlag()
+				this.index = res.target.value
+				if(this.index == 0){
+					this.pageIndex = 1
+					this.hotTasks = []
+					this.more_dis = true
+					this.over_dis = false
+					this.getTasks()
+					return
+				}
+				const entPlan = this.array[this.index]
+				this.$myRequest({
+					url: "/getEntsByPlan?entPlan=" + entPlan + "&pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
+					method: "GET",
+					success: res => {
+						console.log(res)
+						this.hotTasks = res.data.data						this.total = res.data.total
+					}
+				})
+			},
+			searchTasks(){
+/* 				if(this.text == "" || this.text == null || this.text == undefined){
+					uni.showToast({
+						title: "请输入有效关键字",
+						icon: "none",
+					})
+					return
+				} */
+				if(this.text == "" || this.text == null || this.text == undefined){
+					this.pageIndex = 1
+					this.hotTasks = []
+					this.more_dis = true
+					this.over_dis = false
+					return this.getTasks()
+				}
+				
+				const entPlan = this.array[this.index]
+				this.$myRequest({
+					url: "/getEntsByText?entPlan=" + entPlan + "&text=" + this.text + "&pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
+					method: "GET",
+					success: res => {
+						this.hotTasks = res.data.data
+						this.total = res.data.total
+					}
+				})
 			}
 		},
 		components: {
@@ -85,20 +151,57 @@
 </script>
 
 <style lang="scss">
-	.condition {
-    margin-top: 20 rpx;
-    display: flex;
-    text-align: center;
-    border-bottom: 1 rpx solid #eee;
+	.cond{
+		margin: 30rpx 30rpx;
+		display: flex;
+		.condition {
+			margin-left: 5rpx;
+			padding: 0 5rpx;
+			display: flex;
+			width: 200rpx;
+			height: 50rpx;
+			line-height: 50rpx;
+			color: #007AFF;
+			text-align: center;
+			image{
+				width: 30rpx;
+				height: 20rpx;
+				margin-top: 17rpx;
+				margin-left: 4rpx;
+			}
+			text{
+				font-size: 20rpx;
+				margin-left: 20rpx;
+			}
+		}
 
-    .cond-item {
-      width: 33%;
-      height: auto;
-      font-size: 30 rpx;
-      line-height: 80 rpx;
-    }
-
+		.btnsarch{   
+			width: 470rpx;
+			height: 50rpx;
+			display: flex;
+			box-sizing: border-box;
+			 input {
+				 width: 320rpx;
+					height: 40rpx;
+					border:2rpx solid #c5464a;
+					padding: 2rpx 4rpx 2rpx 10rpx;
+					border-radius:5rpx;
+					background:transparent;
+				}
+			 button {
+				 	height:50rpx;
+				 	width:auto;
+				 	cursor:pointer;
+					margin-left: 20rpx;
+				 	background:#c5464a;
+					font-size:24rpx;
+					line-height: 50rpx;
+					color:#F9F0DA;
+			}
+			
+		}
 	}
+	
 
 	.btn {
 		margin-left: 295rpx;
@@ -106,9 +209,9 @@
 
 	.over {
 		width: 100%;
-		height: 50 rpx;
+		height: 50rpx;
 		text-align: center;
-		line-height: 50 rpx;
-		font-size: 28 rpx;
+		line-height: 50rpx;
+		font-size: 28rpx;
 	}
 </style>
