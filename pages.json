@@ -115,6 +115,18 @@
 			"style":{
 				"navigationBarTitleText":"找回密码"
 			}
+		},
+		{
+			"path": "pages/backPwd/backPwdTwice",
+			"style": {
+				"navigationBarTitleText": "验证码"
+			}
+		},
+		{
+			"path": "pages/backPwd/backPwdThird",
+			"style": {
+				"navigationBarTitleText": "设置新密码"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。

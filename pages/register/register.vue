@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<view class="logo">
-			<image src="../../static/default/default.jpg"></image>
+			<image src="/static/pics/2.jpg"></image>
 		</view>
 		<view class="from">
 			<view class="input-controls">
@@ -15,23 +15,23 @@
 			<view class="input-controls">
 				<image class="img" src="../../static/login/pwd.png"></image>
 				<input class="input" v-model="password" type="text" maxlength="32" placeholder="登录密码" :password="!showPassword" />
-				<image class="img" :src="showPassword?'/static/image/open.png':'/static/image/close.png'" @tap="pwd"></image>
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/pwd-check.png"></image>
 				<input class="input" v-model="repassword" type="text" maxlength="32" placeholder="确认登录密码" :password="!showrePassword" />
-				<image class="img" :src="showrePassword?'/static/image/open.png':'/static/image/close.png'" @tap="repwd"></image>
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/email.png"></image>
 				<input class="input" v-model="email" type="text" maxlength="32" placeholder="请输入邮箱"/>
-				<image class="img" :src="showrePassword?'/static/image/open.png':'/static/image/close.png'" @tap="repwd"></image>
 			</view>
-			<!-- <view class="input-controls">
+			<view class="input-controls">
 				<image class="img" src="../../static/login/code.png"></image>
 				<input class="input" v-model="code" type="number" maxlength="6" placeholder="验证码" />
-				<view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}</view>
-			</view> -->
+				<view v-if="isShowCode" @click="getCode" class="verificationCode">
+					{{reGet}}
+				</view>
+				<view v-else class="verificationCode">{{daojishi}}s</view>
+			</view>
 		</view>
 
 		<view class="btn" hover-class="btn-hover" @tap="reg">
@@ -46,15 +46,12 @@
 </template>
 
 <script>
-
-	var tha, js;
 	export default {
 		onLoad() {
-			tha = this;
+			
 		},
 		onUnload() {
-			clearInterval(js)
-			this.second = 0;
+			
 		},
 		data() {
 			return {
@@ -63,26 +60,14 @@
 				password: '',
 				repassword: '',
 				code: '',
+				checkCode: "",
 				p_mobile: '',
 				proxy: false,
-				showPassword: false,
-				showrePassword: false,
 				email: "",
-				second: 0
+				isShowCode:true,
+				reGet:"获取验证码",
+				daojishi:"60",
 			};
-		},
-		computed: {
-			yanzhengma() {
-				if (this.second == 0) {
-					return '获取验证码';
-				} else {
-					if (this.second < 1) {
-						return '重新获取0' + this.second;
-					} else {
-						return '重新获取' + this.second;
-					}
-				}
-			}
 		},
 		methods: {
 			pwd() {
@@ -94,40 +79,46 @@
 			proxyCheck() {
 				this.proxy = !this.proxy;
 			},
-			/* getcode() {
-				if (this.second > 0) {
+			getCode(){
+				var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+				if(!myreg.test(this.email)){
+					uni.showToast({
+						title: "请输入格式正确的邮箱",
+						icon: "none"
+					})
 					return;
 				}
-				this.second = 60;
+				if(this.email == null || this.email == undefined || this.email == ""){
+					uni.showToast({
+						title: "请先输入邮箱",
+						icon: "none"
+					})
+					return
+				}
+				//获取验证码倒计时
+				var time = 60;
+				this.isShowCode = false;
+				var timer = setInterval(()=>{
+					time--;
+					this.daojishi = time;
+						if(time === 0){
+							clearInterval(timer);
+							this.isShowCode = true;
+							this.reGet = '重新获取';
+							this.daojishi=60
+						}
+				},1000)
+				//获取验证码
 				this.$myRequest({
-					url: '/userResiger', // 获取短信接口
-					data: {
-						mobile: this.mobile,
-						type:1
-					},
-					method: 'POST',
-					dataType: 'json',
-					success: (res) => {
-						// console.log(res.data);
-						if (res.data.code != 1) {
-							uni.showToast({
-								title: res.data.msg,
-								icon: 'none'
-							});
-						} else {
-							uni.showToast({
-								title: res.data.msg
-							});
-							js = setInterval(function() {
-								tha.second--;
-								if (tha.second == 0) {
-									clearInterval(js)
-								}
-							}, 1000)
+					url: "/sendEmil?email=" + this.email,
+					method: "GET",
+					success: res => {
+						if(res.data.code == 200){
+							this.checkCode = res.data.msg
 						}
 					}
-				});
-			}, */
+				})
+			},
 			reg() {
 				if (this.username == "" || this.username == null || this.username == undefined) {
 					uni.showToast({
@@ -173,13 +164,13 @@
 					})
 					return;
 				}
-				/* if (this.code == "" || this.code == null || this.code == undefined) {
+				if(this.code == null || this.code == undefined || this.code == ""){
 					uni.showToast({
-						icon: 'none',
-						title: '请输入验证码'
-					});
-					return;
-				} */
+						title: "请先输入验证码",
+						icon: "none"
+					})
+					return
+				}
 				if (this.proxy == false) {
 					uni.showToast({
 						icon: 'none',
