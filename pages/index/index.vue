@@ -24,8 +24,9 @@
 			}
 		},
 		onLoad() {
-			
-		},
+
+      /* 获取轮播图数据 */
+    },
 		methods: {
 			/* 获取轮播图数据 */
 			navItemClick(url) {

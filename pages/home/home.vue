@@ -182,17 +182,17 @@
 	}
 
 	.box {
-		width: 650upx;
-		height: 280upx;
-		border-radius: 20upx;
-		margin: 0 auto;
-		background: #fff;
-		box-shadow: 0 5upx 20upx 0upx rgba(0, 0, 150, .2);
+    width: 650 upx;
+    height: 300 upx;
+    border-radius: 20 upx;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 5 upx 20 upx 0 upx rgba(0, 0, 150, .2);
 
-		/* 导航 */
-		.nav {
-			display: flex;
-			border-bottom: 1rpx solid #eee;
+    /* 导航 */
+    .nav {
+      display: flex;
+      border-bottom: 1 rpx solid #eee;
 
 			/* 图标+文字 */
 			.nav_item {

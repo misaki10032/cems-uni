@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<view class="condition">
-			<view class="cond-item" v-for="item in condition">{{item}}</view>
-		</view>
+      <view v-for="(item,index) in condition" :key="index" class="cond-item">{{ item }}</view>
+    </view>
 
 		<tasks :hotTasks="hotTasks"></tasks>
 		<button class="btn" size="mini" type="default" @click="moreTask" v-if="more_dis">加载更多</button>
@@ -86,16 +86,17 @@
 
 <style lang="scss">
 	.condition {
-		display: flex;
-		text-align: center;
-		border-bottom: 1rpx solid #eee;
+    margin-top: 20 rpx;
+    display: flex;
+    text-align: center;
+    border-bottom: 1 rpx solid #eee;
 
-		.cond-item {
-			width: 33%;
-			height: auto;
-			font-size: 30 rpx;
-			line-height: 80 rpx;
-		}
+    .cond-item {
+      width: 33%;
+      height: auto;
+      font-size: 30 rpx;
+      line-height: 80 rpx;
+    }
 
 	}
 

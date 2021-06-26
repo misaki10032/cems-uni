@@ -8,7 +8,6 @@
 			<!-- 单子价格 + 状态 -->
 			<view class="recommend_tasks_list_task_price">
 				<text>{{task.entMoney | showPrice}}</text>
-				<text>{{task.entMoney | showPrice}}</text>
 				<text>{{task.entPlan}}</text>
 			</view>
 		</view>
@@ -21,9 +20,7 @@
 			"hotTasks"
 		],
 		data() {
-			return {
-			
-			}
+			return {}
 		},
 		methods: {
 			toTaskInfo(id){
@@ -36,15 +33,14 @@
 		filters: {
 			/* 回去金额 格式 */
 			showPrice(price) {
-				return '￥' + (price * 0.8).toFixed(2)
-			},
+        return '￥' + (price * 1).toFixed(2)
+      },
 			showName(name){
 				if(name.length > 10){
 					return name.substr(0,10) + "..."
 				} else {
 					return name
 				}
-				
 			}
 		}
 	}
@@ -75,19 +71,13 @@
 				/* 单子详情 */
 				.recommend_tasks_list_task_price {
 					text:nth-child(2) {
-						color: #ccc;
-						font-size: 25rpx;
-						text-decoration: line-through;
-						margin-left: 10rpx;
-					}
-	
-					text:nth-child(3) {
 						color: #F55C23;
 						font-size: 25rpx;
 						position: absolute;
 						right: 30rpx;
 					}
-				}
+
+        }
 			}
 		}
 	
