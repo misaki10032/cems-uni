@@ -6,8 +6,8 @@
 		},
 		/* 显示触发 */
 		onShow() {
-			
-		},
+
+    },
 		/* 隐藏触发 */
 		onHide() {
 			console.log('App Hide')
