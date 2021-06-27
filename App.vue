@@ -2,7 +2,7 @@
 	export default {
 		/* 只触发一次，app启动加载 */
 		onLaunch() {
-		
+			
 		},
 		/* 显示触发 */
 		onShow() {
