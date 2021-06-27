@@ -133,18 +133,6 @@ export default {
 
 }
 
-.btn {
-  color: #FFFFFF;
-  font-size: 34 rpx;
-  height: auto;
-  border: 0;
-  line-height: 100 rpx;
-  position: absolute;
-  bottom: 0 rpx;
-  display: flex;
-  width: 750 rpx;
-  border: none;
-}
 
 button {
   font-size: 34 rpx;

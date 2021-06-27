@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<image src="/static/pics/2.jpg"></image>
-		</view>
+      <image src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg"></image>
+    </view>
 		<view class="list">
 			<view class="list-call">
 				<image class="img" src="/static/login/phone.png"></image>

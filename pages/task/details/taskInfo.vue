@@ -32,8 +32,8 @@
 			</view>
 		</view>
 		<view class="btn">
-      <button @click="lookOtherTasks">查看其他</button>
-      <button v-if="btn_dis" type="warn" @click="taskDone(tasks.id)">接手订单</button>
+      <button size="default" @click="lookOtherTasks">查看其他</button>
+      <button v-if="btn_dis" size="default" type="warn" @click="taskDone(tasks.id)">接手订单</button>
     </view>
 	</view>
 
@@ -165,37 +165,31 @@
 				text {
 					font-size: 25rpx;
 					line-height: 25rpx;
-					color: #87878a;
-				}
+          color: #87878a;
+        }
 
-				text:nth-child(2) {
-					margin-left: 10rpx;
-				}
-			}
-		}
+        text:nth-child(2) {
+          margin-left: 10 rpx;
+        }
+      }
+    }
 
-	}
+  }
 
-	.btn {
-    color: #FFFFFF;
+  button {
     font-size: 34 rpx;
-    width: 750 rpx;
     height: auto;
-    // border-radius: 50rpx;
     border: 0;
+    text-align: center;
     line-height: 100 rpx;
     position: absolute;
     bottom: 0 rpx;
-    display: flex;
+    width: 750 rpx;
+    border: none;
+  }
 
-    button {
-      width: 375 rpx;
-      text-align: center;
-    }
-
-    button::after {
-      border: none;
-      border-radius: 0;
-    }
+  button::after {
+    border: none;
+    border-radius: 0;
   }
 </style>
