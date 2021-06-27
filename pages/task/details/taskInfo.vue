@@ -32,9 +32,9 @@
 			</view>
 		</view>
 		<view class="btn">
-			<button type="default" @click="lookOtherTasks">查看其他</button>
-			<button v-if="btn_dis" type="primary" @click="taskDone(tasks.id)">接手订单</button>
-		</view>
+      <button @click="lookOtherTasks">查看其他</button>
+      <button v-if="btn_dis" type="warn" @click="taskDone(tasks.id)">接手订单</button>
+    </view>
 	</view>
 
 
@@ -117,7 +117,7 @@
 
 <style lang="scss">
 	.tasks {
-		
+
 		margin: 30rpx 30rpx;
 
 		.title {
@@ -177,19 +177,25 @@
 	}
 
 	.btn {
-		color: #FFFFFF;
-		font-size: 34rpx;
-		width: 750rpx;
-		height: auto;
-		border-radius: 50rpx;
-		line-height: 100rpx;
-		position: absolute;
-		bottom: 0rpx;
-		display: flex;
+    color: #FFFFFF;
+    font-size: 34 rpx;
+    width: 750 rpx;
+    height: auto;
+    // border-radius: 50rpx;
+    border: 0;
+    line-height: 100 rpx;
+    position: absolute;
+    bottom: 0 rpx;
+    display: flex;
 
-		button {
-			width: 375rpx;
-			text-align: center;
-		}
-	}
+    button {
+      width: 375 rpx;
+      text-align: center;
+    }
+
+    button::after {
+      border: none;
+      border-radius: 0;
+    }
+  }
 </style>

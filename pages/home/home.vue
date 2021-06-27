@@ -28,11 +28,12 @@
 					</view>
 				</view>
 				<view class="li" @click="logOut">
-					<view>退出
-						<text>></text>
-					</view>
-				</view>
-			</view>
+          <view>退出登录
+            <text>></text>
+          </view>
+        </view>
+
+      </view>
 		</view>
 	</view>
 
@@ -42,20 +43,29 @@
 	export default {
 		data() {
 			return {
-				headImg: {},
-				menu: [{
-						"title": "关于我们",
-						"url": "/pages/aboutUs/aboutUs"
-					},
-					{
-						"title": "账号与安全",
-						"url": "/pages/safe/safe"
-					},
-					{
-						"title": "权限申请",
-						"url": "/pages/safe/safe"
-					}
-				],
+        headImg: {},
+        menu: [
+          {
+            "title": "我的帖子",
+            "url": "/pages/aboutUs/aboutUs"
+          },
+          {
+            "title": "我的评论",
+            "url": "/pages/aboutUs/aboutUs"
+          },
+          {
+            "title": "账号安全",
+            "url": "/pages/safe/safe"
+          },
+          {
+            "title": "权限申请",
+            "url": "/pages/safe/safe"
+          },
+          {
+            "title": "关于我们",
+            "url": "/pages/aboutUs/aboutUs"
+          }
+        ],
 				nav: [{
 						"title": "我关注的",
 						"num": 0,

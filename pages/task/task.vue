@@ -11,9 +11,9 @@
 			</view>
 			
 			<view class="btnsarch">
-				 <input type="text"  placeholder="快递/作业" v-model="text">
-				 <button type="default" @click="searchTasks">搜索</button>
-			</view>
+        <input v-model="text" placeholder=" 内容 | 类型 | 时间 " type="text">
+        <button type="default" @click="searchTasks">搜索</button>
+      </view>
 	
 		</view>
 
@@ -113,18 +113,12 @@
 					method: "GET",
 					success: res => {
 						console.log(res)
-						this.hotTasks = res.data.data						this.total = res.data.total
+						this.hotTasks = res.data.data
+						this.total = res.data.total
 					}
 				})
 			},
 			searchTasks(){
-/* 				if(this.text == "" || this.text == null || this.text == undefined){
-					uni.showToast({
-						title: "请输入有效关键字",
-						icon: "none",
-					})
-					return
-				} */
 				if(this.text == "" || this.text == null || this.text == undefined){
 					this.pageIndex = 1
 					this.hotTasks = []
@@ -208,10 +202,11 @@
 	}
 
 	.over {
-		width: 100%;
-		height: 50rpx;
-		text-align: center;
-		line-height: 50rpx;
-		font-size: 28rpx;
-	}
+    width: 100%;
+    height: 50 rpx;
+    text-align: center;
+    line-height: 50 rpx;
+    font-size: 28 rpx;
+    color: #aaaaaa;
+  }
 </style>

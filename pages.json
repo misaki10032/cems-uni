@@ -41,13 +41,14 @@
 		{
 			"path": "pages/home/myself/myself",
 			"style": {
-				"navigationBarTitleText": "账号设置"
+				"navigationBarTitleText": "账号设置",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/message/taskStatus/taskStatus",
 			"style": {
-				"navigationBarTitleText": "订单状态"
+				"navigationBarTitleText": "我的任务"
 			}
 		},
 		{
@@ -66,6 +67,12 @@
 			"path": "pages/task/details/taskInfo",
 			"style": {
 				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/task/details/userTaskInfo",
+			"style": {
+				"navigationBarTitleText": "任务详情"
 			}
 		},
 		{

@@ -10,10 +10,10 @@
 			<text>></text>
 		</view>
 		<view @click="infoUpd(2,info.userDec)">
-			<text>个性签名</text>
-			<text>{{info.userDec}}</text>
-			<text>></text>
-		</view>
+      <text>个性签名</text>
+      <text>{{ resInfo.newDec }}</text>
+      <text>></text>
+    </view>
 		<view @click="infoUpd(3,info.userPname)">
 			<text>昵称</text>
 			<text>{{info.userPname}}</text>
@@ -35,60 +35,77 @@
 			</picker>
 			<image :src="flag == true ? '/static/search/up.png' : '/static/search/on.png'" mode=""></image>
 		</view>
-		<view>
-			<text>出生年月</text>
-			<picker @click="isdFlag()" mode="date" :end="endDate" @cancel="isdFlag" @change="bindDateChange">
-				<view class="uni-input">{{info.userBirth | formatDate}}</view>
-			</picker>
-			<image :src="dflag == true ? '/static/search/up.png' : '/static/search/on.png'" mode=""></image>
-		</view>
-		<view @click="infoUpd(5,info.userHouse)">
-			<text>家庭住址</text>
-			<text>{{info.userHouse}}</text>
-			<text>></text>
-		</view>
+    <view>
+      <text>出生年月</text>
+      <picker :end="endDate" :value="info.userBirth | formatDate" mode="date" selector-type="picker" @cancel="isdFlag"
+              @change="bindDateChange" @click="isdFlag()">
+        <view class="uni-input">{{ info.userBirth | formatDate }}</view>
+      </picker>
+      <image :src="dflag == true ? '/static/search/up.png' : '/static/search/on.png'" mode=""></image>
+    </view>
+    <view @click="infoUpd(5,info.userHouse)">
+      <text>家庭住址</text>
+      <text>{{ resInfo.newUserHouse }}</text>
+      <text>></text>
+    </view>
 	</view>
 </template>
 
 <script>
 	export default {
 		data() {
-
 			return {
-				info: uni.getStorageSync("loginUser"),
-				img: "/static/pics/2.jpg",
-				flag: true,
-				dflag: true,
-				array: ['男', '女'],
-				index: 0
-			}
+        info: {},
+        resInfo: {
+          newUserHouse: "",
+          newDec: ""
+        },
+        img: "/static/pics/2.jpg",
+        flag: true,
+        dflag: true,
+        array: ['男', '女'],
+        index: 0
+      }
 		},
-		onShow() {
-			this.flushthis();
-		},
-		mounted() {
-			/* uni.$on('send',(...data) => {
-				console.log('监听到事件来自 send ，携带参数 msg 为：' + data);
-			}) */
-		},
-		computed: {
-			endDate() {
-				return new Date().getDate();
-			}
-		},
-		methods: {
-			flushthis(){
-				const user = uni.getStorageSync("loginUser")
-				let id = user.userId
-				this.$myRequest({
-					url: "/getThisUser?id=" + id,
-					method: "GET",
-					success: res => {
-						if (res.data.code == 200) {
-							uni.removeStorageSync("loginUser")
-							uni.setStorageSync("loginUser", res.data.userInfo)
-							console.log(res.data)
-						}
+    onShow() {
+      this.flushthis();
+    },
+    mounted() {
+
+    },
+    computed: {
+      endDate() {
+        return new Date().getDate();
+      }
+    },
+    onPullDownRefresh() {
+
+    },
+    methods: {
+      flushthis() {
+        const user = uni.getStorageSync("loginUser")
+        let id = user.userId
+        this.$myRequest({
+          url: "/getThisUser?id=" + id,
+          method: "GET",
+          success: res => {
+            if (res.data.code == 200) {
+              uni.removeStorageSync("loginUser")
+              uni.setStorageSync("loginUser", res.data.userInfo)
+              this.info = res.data.userInfo;
+              this.resInfo = res.data.userInfo;
+
+              if (this.info.userDec.length > 16) {
+                this.resInfo.newDec = this.info.userDec.substr(0, 16) + "..."
+              } else {
+                this.resInfo.newDec = this.info.userDec
+              }
+              if (this.info.userHouse.length > 16) {
+                this.resInfo.newUserHouse = this.info.userHouse.substr(0, 16) + "..."
+              } else {
+                this.resInfo.newUserHouse = this.info.userHouse
+              }
+            }
 						if (res.data.code != 200) {
 							uni.clearStorage()
 							setTimeout(() => {
@@ -150,12 +167,6 @@
 			isdFlag() {
 				this.dflag = !this.dflag
 			},
-			startDate() {
-				return this.getDate('start');
-			},
-			endDate() {
-				return this.getDate('end');
-			},
 			bindDateChange: function(e) {
 				this.info.userBirth = e.target.value
 				this.$myRequest({
@@ -181,15 +192,20 @@
 		},
 		filters: {
 			formatDate: function(value) {
-				return new Date(value).toLocaleDateString()
-			}
+        var date = new Date(value);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        month = month > 9 ? month : '0' + month;
+        day = day > 9 ? day : '0' + day;
+        return `${year}-${month}-${day}`;
+      }
 		}
 	}
 </script>
 
 <style lang="scss">
 	.myself {
-
 		image {
 			width: 100rpx;
 			height: 100rpx;
@@ -219,13 +235,13 @@
 		
 		view:nth-child(8) {
 			.uni-input {
-				width: 60rpx;
-				height: 60rpx;
-				text-align: center;
-				position: absolute;
-				right: 120rpx;
-				top: 680rpx;
-			}
+        width: 660 rpx;
+        height: 60 rpx;
+        text-align: right;
+        position: absolute;
+        top: 680 rpx;
+
+      }
 		
 			image {
 				width: 30rpx;

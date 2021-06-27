@@ -25,10 +25,10 @@
 			return {
 				msg: "你居然一条消息都没有",
 				nav: [{
-						"title": "订单状态",
-						"icon": "/static/message/taskStatus.png",
-						"url": "/pages/message/taskStatus/taskStatus"
-					},
+          "title": "我的任务",
+          "icon": "/static/message/taskStatus.png",
+          "url": "/pages/message/taskStatus/taskStatus"
+        },
 					{
 						"title": "系统消息",
 						"icon": "/static/message/systemMsg.png",

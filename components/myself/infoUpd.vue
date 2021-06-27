@@ -61,28 +61,19 @@
 								icon: "success"
 							})
 							setTimeout(() => {
-								uni.switchTab({
-									url:"/pages/home/home"
-								})
-							},1000)
+                uni.navigateBack({})
+              }, 500)
 						}else{
 							uni.showToast({
 								title: res.data.msg,
 								icon: "success"
 							})
 							setTimeout(() => {
-								uni.switchTab({
-									url:"/pages/home/home"
-								})
-							},1000)
+                uni.navigateBack({})
+              }, 500)
 						}
 					}
 				})
-				/* uni.$emit("send",[this.nparam,this.nid])
-				uni.navigateBack({
-					animationDuration: 200,
-					animationType: "zoom-in"
-				}) */
 			},
 			btnOk(){
 				this.btn = false
