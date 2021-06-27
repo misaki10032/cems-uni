@@ -31,3 +31,8 @@ hs_err_pid*
 unpackage/
 unpackage
 unpackage/*
+
+node_modules
+node_modules/
+node_modules/*
+node_modules/**
