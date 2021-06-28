@@ -36,10 +36,53 @@
 		data() {
 			return {
 				mobile: '',
-				password: ''
+				password: '',
+				position:{
+					userId:"",
+					userAddress:"",
+					userLongitude:"",
+					userLatitude:""
+				}
 			};
 		},
 		methods: {
+			getUserPosition(userId){
+				var that = this;
+				uni.getLocation({
+					type:'gcj02',
+					geocode:true,
+					success: function (res) {
+						var add = ""+res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						that.position.userAddress = add;
+						that.position.userLatitude = res.latitude;
+						that.position.userLongitude = res.longitude;
+						that.setPosition(userId);
+					}
+				})
+			},
+			setPosition(userId){
+				console.log(this.position)
+				this.$myRequest({
+					url: '/setUserPosition',
+					data: {
+						userId: userId,
+						longitude: this.position.userLongitude,
+						latitude:this.position.userLatitude,
+						userInfo:this.position.userAddress
+					},
+					method: 'GET',
+					dataType: 'json',
+					success: (res) => {
+						console.log(res)
+						if (res.data.code != 200) {
+							uni.showToast({
+								title:"获取位置信息失败!",
+								icon:'none'
+							})
+						} 
+					}
+				});
+			},
 			toIndex() {
 				uni.redirectTo({
 					url: "/pages/index/index"
@@ -89,6 +132,7 @@
 							console.log(token);
 							uni.setStorageSync('token', token);
 							uni.setStorageSync('loginUser', res.data.loginUser);
+							this.getUserPosition(res.data.loginUser.userId);
 							setTimeout(() => {
 								uni.showToast({
 									title: "登录成功",

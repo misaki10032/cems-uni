@@ -37,8 +37,7 @@
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog mode="base" message="成功消息" content="确定要退出?" :duration="2000" :before-close="true"
 				@close="close" @confirm="confirm">
-
-      </uni-popup-dialog>
+			</uni-popup-dialog>
 		</uni-popup>
 	</view>
 
