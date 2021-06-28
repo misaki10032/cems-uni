@@ -5,7 +5,7 @@
 				<uni-easyinput type="password" v-model="formData.psw" placeholder="请输入原密码" />
 			</uni-forms-item>
 			<uni-forms-item label="新密码" required name="newPsw">
-				<uni-easyinput type="password" v-model="formData.newPsw" placeholder="请输入新密码" />
+				<uni-easyinput 	type="password" v-model="formData.newPsw" placeholder="请输入新密码" />
 			</uni-forms-item>
 			<uni-forms-item label="新密码" required name="newPsw1">
 				<uni-easyinput type="password" v-model="formData.newPsw1" placeholder="请再次输入新密码" />
@@ -39,7 +39,31 @@
 				},
 				rules: {
 					// 对psw字段进行必填验证
+					psw: {
+						rules: [{
+								required: true,
+								errorMessage: '请输入正确的格式',
+							},
+							{
+								minLength: 2,
+								maxLength: 20,
+								errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符',
+							}
+						]
+					},
 					newPsw: {
+						rules: [{
+								required: true,
+								errorMessage: '请输入正确的格式',
+							},
+							{
+								minLength: 2,
+								maxLength: 20,
+								errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符',
+							}
+						]
+					},
+					newPsw1: {
 						rules: [{
 								required: true,
 								errorMessage: '请输入正确的格式',
