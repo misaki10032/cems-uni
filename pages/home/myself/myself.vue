@@ -129,7 +129,7 @@
 						this.img = res.tempFilePaths
 					},
 					fail() {
-						alert("系统繁忙，稍后再试")
+						
 					}
 				})
 			},

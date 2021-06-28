@@ -134,6 +134,18 @@
 			"style": {
 				"navigationBarTitleText": "设置新密码"
 			}
+		},
+		{
+			"path": "pages/task/details/entrust",
+			"style": {
+				"navigationBarTitleText": "发布委托"
+			}
+		},
+		{
+			"path": "pages/index/post/post",
+			"style": {
+				"navigationBarTitleText": "发布帖子"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
@@ -174,15 +186,4 @@
 			}
 		]
 	}
-	//  启动配置
-	/* "condition": {
-		"current": 0,      //  list的索引
-		"list": [
-			{
-				"name": "详情页",
-				"path": "",
-				"query": "id=80"
-			}
-		]
-	} */
 }

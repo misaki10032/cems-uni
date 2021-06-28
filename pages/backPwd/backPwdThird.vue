@@ -4,11 +4,11 @@
 			<view class="msg">请设置新的密码。</view>
 			<view class="input-controls">
 				<image class="img" src="/static/login/pwd.png"></image>
-				<input class="input" v-model="password" type="text" maxlength="32" placeholder="重新设置密码" :password="!showPassword" />
+				<input class="input" v-model="password" password type="text" maxlength="32" placeholder="重新设置密码"/>
 			</view>
 			<view class="input-controls">
 				<image class="img" src="/static/login/pwd-check.png"></image>
-				<input class="input" v-model="repassword" type="text" maxlength="32" placeholder="重新输入设置密码" :password="!showrePassword" />
+				<input class="input" v-model="repassword" password type="text" maxlength="32" placeholder="重新输入设置密码"/>
 			</view>
 		</view>
 

@@ -85,7 +85,7 @@
 								icon: 'none'
 							});
 						} else {
-							var token = uni.getStorageSync('token');
+							var token = res.data.token;
 							console.log(token);
 							uni.setStorageSync('token', token);
 							uni.setStorageSync('loginUser', res.data.loginUser);
