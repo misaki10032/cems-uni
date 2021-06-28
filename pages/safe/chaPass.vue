@@ -11,7 +11,7 @@
 				<uni-easyinput type="text" v-model="formData.newPsw1" placeholder="请再次输入新密码" />
 			</uni-forms-item>
 			<view style="display: flex;">
-				<button style="width: 365rpx;" type="warn" @click="chongzhi">重置</button>
+				<button style="width: 365rpx;" type="warn" form-type="reset">重置</button>
 				<button style="width: 365rpx;" type="primary" @click="submitForm">提交</button>
 			</view>
 		</uni-forms>

@@ -8,7 +8,6 @@
 							<img src="https://img0.baidu.com/it/u=387321899,1968228181&fm=26&fmt=auto&gp=0.jpg">
 						</view>
 					</view>
-
 				</view>
 			</view>
 		</view>
