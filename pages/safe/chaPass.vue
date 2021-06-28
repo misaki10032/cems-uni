@@ -1,5 +1,5 @@
 <template>
-	<view class="" style="margin-top: 100rpx;">
+	<view class="" style="margin: 100rpx 20rpx 0 20rpx ;">
 		<uni-forms :modelValue="formData" ref="form" :rules="rules">
 			<uni-forms-item label="原密码" required name="psw">
 				<uni-easyinput type="text" v-model="formData.psw" placeholder="请输入原密码" />
