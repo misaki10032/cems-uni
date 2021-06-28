@@ -230,7 +230,7 @@
     /* 导航 */
     .nav {
       display: flex;
-      border-bottom: 1 rpx solid #eee;
+      border-bottom: 1rpx solid #eee;
 
 			/* 图标+文字 */
 			.nav_item {

@@ -235,11 +235,11 @@
 		
 		view:nth-child(8) {
 			.uni-input {
-        width: 660 rpx;
-        height: 60 rpx;
+        width: 660rpx;
+        height: 60rpx;
         text-align: right;
         position: absolute;
-        top: 680 rpx;
+        top: 680rpx;
 
       }
 		

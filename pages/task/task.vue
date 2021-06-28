@@ -144,55 +144,55 @@
 
 <style lang="scss">
 .cond {
-  margin: 30 rpx 30 rpx;
+  margin: 30rpx 30rpx;
   display: flex;
 
   .condition {
-    margin-left: 5 rpx;
-    padding: 0 5 rpx;
+    margin-left: 5rpx;
+    padding: 0 5rpx;
     display: flex;
-    width: 200 rpx;
-    height: 50 rpx;
-    line-height: 50 rpx;
+    width: 200rpx;
+    height: 50rpx;
+    line-height: 50rpx;
     color: #007AFF;
     text-align: center;
 
     image {
-      width: 30 rpx;
-      height: 20 rpx;
-      margin-top: 17 rpx;
-      margin-left: 4 rpx;
+      width: 30rpx;
+      height: 20rpx;
+      margin-top: 17rpx;
+      margin-left: 4rpx;
     }
 
     text {
-      font-size: 20 rpx;
-      margin-left: 20 rpx;
+      font-size: 20rpx;
+      margin-left: 20rpx;
     }
   }
 
   .btnsarch {
-    width: 470 rpx;
-    height: 50 rpx;
+    width: 470rpx;
+    height: 50rpx;
     display: flex;
     box-sizing: border-box;
 
     input {
-      width: 320 rpx;
-      height: 40 rpx;
-      border: 2 rpx solid #c5464a;
-      padding: 2 rpx 4 rpx 2 rpx 10 rpx;
-      border-radius: 5 rpx;
+      width: 320rpx;
+      height: 40rpx;
+      border: 2rpx solid #c5464a;
+      padding: 2rpx 4rpx 2rpx 10rpx;
+      border-radius: 5rpx;
       background: transparent;
     }
 
     button {
-      height: 50 rpx;
+      height: 50rpx;
       width: auto;
       cursor: pointer;
-      margin-left: 20 rpx;
+      margin-left: 20rpx;
       background: #c5464a;
-      font-size: 24 rpx;
-      line-height: 50 rpx;
+      font-size: 24rpx;
+      line-height: 50rpx;
       color: #F9F0DA;
     }
 
@@ -206,10 +206,10 @@
 
 	.over {
     width: 100%;
-    height: 50 rpx;
+    height: 50rpx;
     text-align: center;
-    line-height: 50 rpx;
-    font-size: 28 rpx;
+    line-height: 50rpx;
+    font-size: 28rpx;
     color: #aaaaaa;
   }
 </style>

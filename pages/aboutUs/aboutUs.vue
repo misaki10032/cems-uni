@@ -52,8 +52,8 @@
 			}
 		}
 		.aboutus-map {
-      width: 750 rpx;
-      height: 985 rpx;
+      width: 750rpx;
+      height: 985rpx;
     }
 	}
 </style>
