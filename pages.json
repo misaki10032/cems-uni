@@ -41,13 +41,14 @@
 		{
 			"path": "pages/home/myself/myself",
 			"style": {
-				"navigationBarTitleText": "账号设置"
+				"navigationBarTitleText": "账号设置",
+				"enablePullDownRefresh": true
 			}
 		},
 		{
 			"path": "pages/message/taskStatus/taskStatus",
 			"style": {
-				"navigationBarTitleText": "订单状态"
+				"navigationBarTitleText": "我的任务"
 			}
 		},
 		{
@@ -66,6 +67,12 @@
 			"path": "pages/task/details/taskInfo",
 			"style": {
 				"navigationBarTitleText": "订单详情"
+			}
+		},
+		{
+			"path": "pages/task/details/userTaskInfo",
+			"style": {
+				"navigationBarTitleText": "任务详情"
 			}
 		},
 		{
@@ -93,9 +100,9 @@
 			}
 		},
 		{
-			"path":"pages/home/myself/nickNameUpd/nickNameUpd",
+			"path":"pages/home/myself/myselfUpd/myselfUpd",
 			"style": {
-				"navigationBarTitleText": "修改昵称"
+				"navigationBarTitleText": "修改信息"
 			}
 		},
 		{
@@ -114,6 +121,18 @@
 			"path":"pages/backPwd/backPwd",
 			"style":{
 				"navigationBarTitleText":"找回密码"
+			}
+		},
+		{
+			"path": "pages/backPwd/backPwdTwice",
+			"style": {
+				"navigationBarTitleText": "验证码"
+			}
+		},
+		{
+			"path": "pages/backPwd/backPwdThird",
+			"style": {
+				"navigationBarTitleText": "设置新密码"
 			}
 		}
 	],
@@ -142,23 +161,11 @@
 				"selectedIconPath": "static/tabbarIcon/select-task.png"
 			},
 			{
-				"text": "+",
-				"pagePath": "pages/home/home",
-				"iconPath": "static/tabbarIcon/home.png",
-				"selectedIconPath": "static/tabbarIcon/select-home.png"
-			},
-			{
 				"text": "信息",
 				"pagePath": "pages/message/message",
 				"iconPath": "static/tabbarIcon/message.png",
 				"selectedIconPath": "static/tabbarIcon/select-message.png"
 			},
-/* 			{
-				"text": "社区",
-				"pagePath": "pages/community/community",
-				"iconPath": "static/tabbarIcon/community-icon.png",
-				"selectedIconPath": "static/tabbarIcon/community-icon.png"
-			}, */
 			{
 				"text": "我的",
 				"pagePath": "pages/home/home",

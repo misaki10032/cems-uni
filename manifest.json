@@ -1,16 +1,17 @@
 {
     "name" : "cems",
-    "appid" : "__UNI__A5D1229",
+    "appid" : "__UNI__6DCDA6D",
     "description" : "",
     "versionName" : "1.0.0",
     "versionCode" : "100",
     "transformPx" : false,
-	"h5" : {
-		//实现跨域访问
+    "h5" : {
+        //实现跨域访问
         "devServer" : {
             "port" : 9200, //本机端口
             "disableHostCheck" : true,
-            "proxy" : { //访问的ip及端口，可有多个
+            "proxy" : {
+                //访问的ip及端口，可有多个
                 "/uac" : {
                     "target" : "http://192.168.0.125:9101/",
                     "changeOrigin" : true,
@@ -33,7 +34,7 @@
     /* 5+App特有相关 */
     "app-plus" : {
         "usingComponents" : true,
-		"nvueStyleCompiler" : "uni-app",
+        "nvueStyleCompiler" : "uni-app",
         "compilerVersion" : 3,
         "splashscreen" : {
             "alwaysShowBeforeRender" : true,
@@ -75,7 +76,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "touristappid",
         "setting" : {
             "urlCheck" : false
         },
@@ -90,7 +91,7 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     }
 }

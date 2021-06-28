@@ -4,12 +4,12 @@
 			<view class="bg">
 				<view class="box">
 					<view class="box-hd">
-						<view class="avator">
-							<img @click="toMyself" src="../../static/logo.png">
-						</view>
-						<view class="phone-number">{{user.userPname}}</view>
-						<view class="role">{{user.userRole}}</view>
-					</view>
+            <view class="avator" @click="toMyself">
+              <img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
+            </view>
+            <view class="phone-number">{{ user.userPname }}</view>
+            <view class="role">{{ user.userRole }}</view>
+          </view>
 					<view class="nav">
 						<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">
 							<view>{{n.num}}</view>
@@ -27,13 +27,13 @@
 						<text>></text>
 					</view>
 				</view>
-				<view class="li">
-					<view @click="logOut">
-						退出
-						<text>></text>
-					</view>
-				</view>
-			</view>
+				<view class="li" @click="logOut">
+          <view>退出登录
+            <text>></text>
+          </view>
+        </view>
+
+      </view>
 		</view>
 	</view>
 
@@ -43,20 +43,29 @@
 	export default {
 		data() {
 			return {
-				headImg: {},
-				menu: [{
-						"title": "关于我们",
-						"url": "/pages/aboutUs/aboutUs"
-					},
-					{
-						"title": "账号与安全",
-						"url": "/pages/safe/safe"
-					},
-					{
-						"title": "权限申请",
-						"url": "/pages/safe/safe"
-					}
-				],
+        headImg: {},
+        menu: [
+          {
+            "title": "我的帖子",
+            "url": "/pages/aboutUs/aboutUs"
+          },
+          {
+            "title": "我的评论",
+            "url": "/pages/aboutUs/aboutUs"
+          },
+          {
+            "title": "账号安全",
+            "url": "/pages/safe/safe"
+          },
+          {
+            "title": "权限申请",
+            "url": "/pages/safe/safe"
+          },
+          {
+            "title": "关于我们",
+            "url": "/pages/aboutUs/aboutUs"
+          }
+        ],
 				nav: [{
 						"title": "我关注的",
 						"num": 0,
@@ -107,10 +116,25 @@
 		},
 		methods: {
 			logOut(){
-				uni.clearStorageSync();
-				uni.redirectTo({
-					url: '/pages/login/login'
+				uni.showModal({
+					title: "温馨提示",
+					content: "您确定要退出吗",
+					showCancel: true,
+					confirmColor: "#DD524D",
+					success: res => {
+						if(res.confirm){
+							uni.clearStorageSync();
+							uni.redirectTo({
+								url: '/pages/login/login'
+							})
+						}
+						if(res.cancel){
+							return
+						}
+					},
+					
 				})
+				
 			},
 			toTask() {
 				uni.switchTab({
@@ -168,24 +192,24 @@
 	}
 
 	.box {
-		width: 650upx;
-		height: 280upx;
-		border-radius: 20upx;
-		margin: 0 auto;
-		background: #fff;
-		box-shadow: 0 5upx 20upx 0upx rgba(0, 0, 150, .2);
+    width: 650 upx;
+    height: 300 upx;
+    border-radius: 20 upx;
+    margin: 0 auto;
+    background: #fff;
+    box-shadow: 0 5 upx 20 upx 0 upx rgba(0, 0, 150, .2);
 
-		/* 导航 */
-		.nav {
-			display: flex;
-			border-bottom: 1rpx solid #eee;
+    /* 导航 */
+    .nav {
+      display: flex;
+      border-bottom: 1 rpx solid #eee;
 
 			/* 图标+文字 */
 			.nav_item {
 
 				width: 33.3%;
 				text-align: center;
-				margin-top: 40rpx;
+				margin-top: 15rpx;
 
 				view {
 					margin: 10rpx auto;
@@ -221,7 +245,7 @@
 			}
 			.role {
 				text-align: center;
-				font-size: 16rpx;
+				font-size: 20rpx;
 				color: #767676;
 			}
 		}
@@ -301,6 +325,7 @@
 				right: 30rpx;
 				color: #ccc;
 			}
+			
 			&.noborder {
 				border-bottom: 0
 			}

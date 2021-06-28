@@ -2,12 +2,12 @@
 	export default {
 		/* 只触发一次，app启动加载 */
 		onLaunch() {
-		
+			
 		},
 		/* 显示触发  */
 		onShow() {
 
-		},
+    },
 		/* 隐藏触发 */
 		onHide() {
 			console.log('App Hide')
@@ -21,4 +21,6 @@
 
 <style>
 	/*每个页面公共css */
+
+
 </style>

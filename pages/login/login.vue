@@ -1,127 +1,139 @@
 <template>
 	<view class="content">
 		<view class="header">
-			<image src="/static/logo.png"></image>
-		</view>
+      <image src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg"></image>
+    </view>
 		<view class="list">
 			<view class="list-call">
-				<image class="img" src="/static/logo.png"></image>
+				<image class="img" src="/static/login/phone.png"></image>
 				<input class="biaoti" v-model="mobile" type="number" maxlength="11" placeholder="输入手机号" />
 			</view>
 			<view class="list-call">
-				<image class="img" src="/static/logo.png"></image>
-				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="输入密码" password="true" />
+				<image class="img" src="/static/login/pwd-check.png"></image>
+				<input class="biaoti" v-model="password" type="text" maxlength="32" placeholder="输入密码"
+					password="true" />
 			</view>
-			
+
 		</view>
-		
+
 		<view class="dlbutton" hover-class="dlbutton-hover" @tap="login()">
 			<text>登录</text>
 		</view>
-		
+
 		<view class="xieyi">
 			<navigator url="/pages/backPwd/backPwd" open-type="navigate">忘记密码</navigator>
 			<text>|</text>
 			<navigator url="/pages/register/register" open-type="navigate">注册账户</navigator>
 			<text>|</text>
-			<navigator url="/pages/index/index" open-type="switchTab" >返回首页</navigator>
+			<navigator url="/pages/index/index" open-type="switchTab">返回首页</navigator>
 		</view>
 	</view>
 </template>
 
 <script>
-	
 	export default {
-		onLoad(){
-		},
+		onLoad() {},
 		data() {
 			return {
-				mobile:'',
-				password:''
+				mobile: '',
+				password: ''
 			};
 		},
 		methods: {
-			toIndex(){
+			toIndex() {
 				uni.redirectTo({
-					url:"/pages/index/index"
+					url: "/pages/index/index"
 				})
 			},
-		    login() {
+			login() {
 				// console.log(md5(this.password + 'app'));return;
-				if (this.mobile.length != 11) {
-				     uni.showToast({
-				        icon: 'none',
-				        title: '手机号不正确'
-				    });
-          return;
-        }
-          if (this.password.length < 2) {
-            uni.showToast({
-              icon: 'none',
-              title: '密码不正确'
-            });
-            return;
-          }
 
-          this.$myRequest({
-            url: '/uniAppLogin',
-            data: {
-              num: this.mobile,
-              pwd: this.password
-            },
-            method: 'POST',
-            dataType: 'json',
-            success: (res) => {
-              console.log(res.data)
-              if (res.data.code != 200) {
-                var msg = "";
-                if (res.data.msg == null || res.data.msg == "") {
-                  msg = "服务器异常"
-                } else {
-                  msg = res.data.msg;
-                }
-                uni.showToast({title: msg, icon: 'none'});
-              } else {
-                var token = uni.getStorageSync('token');
+				var phone = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+				if (!phone.test(this.mobile)) {
+					uni.showToast({
+						icon: 'none',
+						title: '手机号不正确'
+					});
+					return;
+				}
+				if (this.password.length < 2) {
+					uni.showToast({
+						icon: 'none',
+						title: '密码不正确'
+					});
+					return;
+				}
+				this.$myRequest({
+					url: '/uniAppLogin',
+					data: {
+						num: this.mobile,
+						pwd: this.password
+					},
+					method: 'POST',
+					dataType: 'json',
+					success: (res) => {
+						console.log(res.data)
+						if (res.data.code != 200) {
+							var msg = "";
+							if (res.data.msg == null || res.data.msg == "") {
+								msg = "服务器异常"
+							} else {
+								msg = res.data.msg;
+							}
+							uni.showToast({
+								title: msg,
+								icon: 'none'
+							});
+						} else {
+							var token = uni.getStorageSync('token');
 							console.log(token);
-							uni.setStorageSync('token',token);
-							uni.setStorageSync('loginUser',res.data.loginUser);
+							uni.setStorageSync('token', token);
+							uni.setStorageSync('loginUser', res.data.loginUser);
+							setTimeout(() => {
+								uni.showToast({
+									title: "登录成功",
+									icon: "success"
+								})
+							},1500)
 							uni.switchTab({
-								url:'../index/index'
+								url: '/pages/index/index'
 							})
 						}
-				    }
+					}
 				});
-		    }
+			}
 		}
 	}
 </script>
 
 <style>
-	page{
+	page {
 		padding-top: 60rpx;
 	}
+
 	.content {
 		display: flex;
 		flex-direction: column;
-		justify-content:center;
+		justify-content: center;
 	}
+
 	.header {
-		width:161upx;
-		height:161upx;
-		background:rgba(63,205,235,1);
-		box-shadow:0upx 12upx 13upx 0upx rgba(63,205,235,0.47);
-		border-radius:50%;
+		width: 161upx;
+		height: 161upx;
+		background: rgba(63, 205, 235, 1);
+		box-shadow: 0upx 12upx 13upx 0upx rgba(63, 205, 235, 0.47);
+		border-radius: 50%;
 		margin-top: 30upx;
 		margin-left: auto;
 		margin-right: auto;
 	}
-	.header image{
-		width:161upx;
-		height:161upx;
-		border-radius:50%;
+
+	.header image {
+		width: 161upx;
+		height: 161upx;
+		border-radius: 50%;
 	}
-	
+
 	.list {
 		display: flex;
 		flex-direction: column;
@@ -129,20 +141,23 @@
 		padding-left: 70upx;
 		padding-right: 70upx;
 	}
-	.list-call{
+
+	.list-call {
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
 		height: 100upx;
 		color: #333333;
-		border-bottom: 1upx solid rgba(230,230,230,1);
+		border-bottom: 1upx solid rgba(230, 230, 230, 1);
 	}
-	.list-call .img{
+
+	.list-call .img {
 		width: 60upx;
 		height: 60upx;
 	}
-	.list-call .biaoti{
+
+	.list-call .biaoti {
 		flex: 1;
 		text-align: left;
 		font-size: 32upx;
@@ -153,21 +168,23 @@
 	.dlbutton {
 		color: #FFFFFF;
 		font-size: 34upx;
-		width:470upx;
-		height:100upx;
-		background:linear-gradient(-90deg,rgba(63,205,235,1),rgba(188,226,158,1));
-		box-shadow:0upx 0upx 13upx 0upx rgba(164,217,228,0.2);
-		border-radius:50upx;
+		width: 470upx;
+		height: 100upx;
+		background: linear-gradient(-90deg, rgba(63, 205, 235, 1), rgba(188, 226, 158, 1));
+		box-shadow: 0upx 0upx 13upx 0upx rgba(164, 217, 228, 0.2);
+		border-radius: 50upx;
 		line-height: 100upx;
 		text-align: center;
 		margin-left: auto;
 		margin-right: auto;
 		margin-top: 100upx;
 	}
+
 	.dlbutton-hover {
-		background:linear-gradient(-90deg,rgba(63,205,235,0.9),rgba(188,226,158,0.9));
+		background: linear-gradient(-90deg, rgba(63, 205, 235, 0.9), rgba(188, 226, 158, 0.9));
 	}
-	.xieyi{
+
+	.xieyi {
 		display: flex;
 		flex-direction: row;
 		justify-content: center;
@@ -179,7 +196,8 @@
 		height: 40upx;
 		line-height: 40upx;
 	}
-	.xieyi text{
+
+	.xieyi text {
 		font-size: 24upx;
 		margin-left: 15upx;
 		margin-right: 15upx;

@@ -7,17 +7,6 @@ Vue.config.productionTip = false
 Vue.prototype.$myRequest = myRequest
 
 
-/* const token = uni.getStorage({
-	key: "token",
-	success: res => {
-		console.log(res)
-	}
-})
-if (token == null) {
-	uni.redirectTo({
-		url: "/pages/login/login"
-	})
-} */
 
 App.mpType = 'app'
 Vue.codeBase = "utf-8"
