@@ -140,6 +140,18 @@
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
+		},
+		{
+			"path": "pages/task/details/entrust",
+			"style": {
+				"navigationBarTitleText": "发布委托"
+			}
+		},
+		{
+			"path": "pages/index/post/post",
+			"style": {
+				"navigationBarTitleText": "发布帖子"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。

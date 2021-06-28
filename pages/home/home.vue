@@ -12,7 +12,7 @@
 					</view>
 					<view class="nav">
 						<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">
-							<view>{{n.num}}</view>
+							<view>{{n.num}} </view>
 							<view>{{n.title}}</view>
 						</view>
 					</view>

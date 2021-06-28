@@ -14,11 +14,11 @@
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/pwd.png"></image>
-				<input class="input" v-model="password" type="text" maxlength="32" placeholder="登录密码" :password="!showPassword" />
+				<input class="input" v-model="password" password type="text" maxlength="32" placeholder="登录密码" />
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/pwd-check.png"></image>
-				<input class="input" v-model="repassword" type="text" maxlength="32" placeholder="确认登录密码" :password="!showrePassword" />
+				<input class="input" v-model="repassword" password type="text" maxlength="32" placeholder="确认登录密码"/>
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/email.png"></image>
@@ -26,7 +26,7 @@
 			</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/code.png"></image>
-				<input class="input" v-model="code" type="number" maxlength="6" placeholder="验证码" />
+				<input class="input" v-model="code" type="text" maxlength="6" placeholder="验证码" />
 				<view v-if="isShowCode" @click="getCode" class="verificationCode">
 					{{reGet}}
 				</view>

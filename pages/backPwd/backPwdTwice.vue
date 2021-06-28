@@ -4,7 +4,7 @@
 			<view class="msg">请输入验证码。</view>
 			<view class="input-controls">
 				<image class="img" src="../../static/login/code.png"></image>
-				<input class="input" v-model="code" type="number" maxlength="6" placeholder="验证码" />
+				<input class="input" v-model="code" type="text" maxlength="6" placeholder="验证码" />
 				<view v-if="isShowCode" @click="getCode" class="verificationCode">
 					{{reGet}}
 				</view>
