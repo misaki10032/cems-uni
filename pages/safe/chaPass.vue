@@ -2,13 +2,13 @@
 	<view class="" style="margin: 100rpx 20rpx 0 20rpx ;">
 		<uni-forms :modelValue="formData" ref="form" :rules="rules">
 			<uni-forms-item label="原密码" required name="psw">
-				<uni-easyinput type="text" v-model="formData.psw" placeholder="请输入原密码" />
+				<uni-easyinput type="password" v-model="formData.psw" placeholder="请输入原密码" />
 			</uni-forms-item>
 			<uni-forms-item label="新密码" required name="newPsw">
-				<uni-easyinput type="text" v-model="formData.newPsw" placeholder="请输入新密码" />
+				<uni-easyinput type="password" v-model="formData.newPsw" placeholder="请输入新密码" />
 			</uni-forms-item>
 			<uni-forms-item label="新密码" required name="newPsw1">
-				<uni-easyinput type="text" v-model="formData.newPsw1" placeholder="请再次输入新密码" />
+				<uni-easyinput type="password" v-model="formData.newPsw1" placeholder="请再次输入新密码" />
 			</uni-forms-item>
 			<view style="display: flex;">
 				<button style="width: 365rpx;" type="warn" form-type="reset">重置</button>
