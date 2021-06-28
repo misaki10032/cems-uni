@@ -1,16 +1,19 @@
 <template>
-	<view class="">
+	<view class="" style="margin-top: 100rpx;">
 		<uni-forms :modelValue="formData" ref="form" :rules="rules">
-			<uni-forms-item label="原密码" name="psw">
+			<uni-forms-item label="原密码" required name="psw">
 				<uni-easyinput type="text" v-model="formData.psw" placeholder="请输入原密码" />
 			</uni-forms-item>
-			<uni-forms-item label="新密码" name="newPsw">
+			<uni-forms-item label="新密码" required name="newPsw">
 				<uni-easyinput type="text" v-model="formData.newPsw" placeholder="请输入新密码" />
 			</uni-forms-item>
-			<uni-forms-item label="再次输入新密码" name="newPsw1">
+			<uni-forms-item label="新密码" required name="newPsw1">
 				<uni-easyinput type="text" v-model="formData.newPsw1" placeholder="请再次输入新密码" />
 			</uni-forms-item>
-			<button @click="submitForm">提交</button>
+			<view style="display: flex;">
+				<button style="width: 365rpx;" type="warn" @click="chongzhi">重置</button>
+				<button style="width: 365rpx;" type="primary" @click="submitForm">提交</button>
+			</view>
 		</uni-forms>
 	</view>
 </template>
@@ -52,7 +55,6 @@
 			}
 		},
 		methods: {
-
 			submitForm(form) {
 				// 手动提交表单
 				this.$refs.form.submit().then((res) => {

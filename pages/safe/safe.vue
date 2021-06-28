@@ -3,21 +3,18 @@
 		<view class="header">
 			<view class="bg">
 				<view class="box">
-					<view class="box-hd">
+					<view class="box-hd" style="background-color: #b50e03">
 						<view class="avator">							
 							<img src="https://img0.baidu.com/it/u=387321899,1968228181&fm=26&fmt=auto&gp=0.jpg">
 						</view>
 					</view>
-					<view class="nav">
-				
-					</view>
+
 				</view>
 			</view>
 		</view>
 	
 		<view >
-			<!-- <navigator url="/pages/about/about"><button type="default">通过navigator组件跳转到about页面</button></navigator> -->
-			        <button type="default" @click="infoUpd">修改密码                 >></button>
+			<button type="primary" @click="infoUpd">修改密码</button>
 		</view>
 	</view>
 
@@ -54,7 +51,7 @@
 
 	.header {
 		background: #fff;
-		height: 290upx;
+		height: 190upx;
 		padding-bottom: 110upx;
 
 		.bg {
