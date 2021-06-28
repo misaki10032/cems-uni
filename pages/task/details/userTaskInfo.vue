@@ -75,58 +75,58 @@ export default {
 <style lang="scss">
 .tasks {
 
-  margin: 30 rpx 30 rpx;
+  margin: 30rpx 30rpx;
 
   .title {
 
     text:nth-child(2) {
       position: absolute;
-      right: 30 rpx;
-      font-size: 20 rpx;
+      right: 30rpx;
+      font-size: 20rpx;
       color: #007AFF;
     }
   }
 
   .info {
-    margin-top: 10 rpx;
+    margin-top: 10rpx;
 
     text:nth-child(1) {
       width: auto;
-      height: 50 rpx;
+      height: 50rpx;
       background: #007AFF;
       text-align: center;
-      border-radius: 10 rpx;
-      padding: 4 rpx;
+      border-radius: 10rpx;
+      padding: 4rpx;
       color: #eee;
-      font-size: 25 rpx;
-      line-height: 25 rpx;
+      font-size: 25rpx;
+      line-height: 25rpx;
     }
 
     text:nth-child(2) {
-      margin-left: 10 rpx;
+      margin-left: 10rpx;
       text-decoration: blink;
     }
   }
 
   .money {
-    margin-top: 20 rpx;
+    margin-top: 20rpx;
     color: #ff0000;
   }
 
   .time {
-    margin-top: 20 rpx;
+    margin-top: 20rpx;
 
     view {
-      padding: 5 rpx 0;
+      padding: 5rpx 0;
 
       text {
-        font-size: 25 rpx;
-        line-height: 25 rpx;
+        font-size: 25rpx;
+        line-height: 25rpx;
         color: #87878a;
       }
 
       text:nth-child(2) {
-        margin-left: 10 rpx;
+        margin-left: 10rpx;
       }
     }
   }
@@ -135,14 +135,14 @@ export default {
 
 
 button {
-  font-size: 34 rpx;
+  font-size: 34rpx;
   height: auto;
   border: 0;
   text-align: center;
-  line-height: 100 rpx;
+  line-height: 100rpx;
   position: absolute;
-  bottom: 0 rpx;
-  width: 750 rpx;
+  bottom: 0rpx;
+  width: 750rpx;
   border: none;
 }
 </style>

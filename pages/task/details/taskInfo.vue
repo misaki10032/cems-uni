@@ -169,7 +169,7 @@
         }
 
         text:nth-child(2) {
-          margin-left: 10 rpx;
+          margin-left: 10rpx;
         }
       }
     }
@@ -177,14 +177,14 @@
   }
 
   button {
-    font-size: 34 rpx;
+    font-size: 34rpx;
     height: auto;
     border: 0;
     text-align: center;
-    line-height: 100 rpx;
+    line-height: 100rpx;
     position: absolute;
-    bottom: 0 rpx;
-    width: 750 rpx;
+    bottom: 0rpx;
+    width: 750rpx;
     border: none;
   }
 
