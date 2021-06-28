@@ -5,7 +5,7 @@
 				<view class="box">
 					<view class="box-hd">
 						<view class="avator" @click="toMyself">
-							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
+							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">						
 						</view>
 						<view class="phone-number">{{ user.userPname }}</view>
 						<view class="role">{{ user.userRole }}</view>
