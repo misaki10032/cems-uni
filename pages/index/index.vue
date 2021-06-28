@@ -33,11 +33,11 @@ export default {
       array: ['全部', '已被接', '可接单', '已完成'],
       index: 0,
       rotationImgArr: [
-        "/static/rotationImage/01.jpg",
-        "/static/rotationImage/02.jpg",
-        "/static/rotationImage/03.jpg",
-        "/static/rotationImage/04.jpg",
-        "/static/rotationImage/05.jpg"
+        "https://img2.baidu.com/it/u=2994123101,43895145&fm=26&fmt=auto&gp=0.jpg",
+        "https://img1.baidu.com/it/u=4189823403,3419626601&fm=26&fmt=auto&gp=0.jpg",
+        "https://img1.baidu.com/it/u=4067331960,3438608414&fm=26&fmt=auto&gp=0.jpg",
+        "https://img2.baidu.com/it/u=3012717581,3918222610&fm=26&fmt=auto&gp=0.jpg",
+        "https://img1.baidu.com/it/u=1182459655,2369734023&fm=26&fmt=auto&gp=0.jpg"
       ],
     }
   },
@@ -172,69 +172,69 @@ export default {
 			margin-top: 20rpx;
 			/* 热门单子 */
 				.recommend_tasks_title {
-          height: 80 rpx;
-          line-height: 80 rpx;
-          font-size: 50 rpx;
+          height: 80rpx;
+          line-height: 80rpx;
+          font-size: 50rpx;
           color: #b50e03;
           text-align: center;
-          letter-spacing: 20 rpx;
+          letter-spacing: 20rpx;
           background: #FFFFFF;
-          margin: 5 rpx 0;
+          margin: 5rpx 0;
         }
     }
 }
 
 
 .cond {
-  margin: 30 rpx 30 rpx;
+  margin: 30rpx 30rpx;
   display: flex;
 
   .condition {
-    margin-left: 5 rpx;
-    padding: 0 5 rpx;
+    margin-left: 5rpx;
+    padding: 0 5rpx;
     display: flex;
-    width: 200 rpx;
-    height: 50 rpx;
-    line-height: 50 rpx;
+    width: 200rpx;
+    height: 50rpx;
+    line-height: 50rpx;
     color: #007AFF;
     text-align: center;
 
     image {
-      width: 30 rpx;
-      height: 20 rpx;
-      margin-top: 17 rpx;
-      margin-left: 4 rpx;
+      width: 30rpx;
+      height: 20rpx;
+      margin-top: 17rpx;
+      margin-left: 4rpx;
     }
 
     text {
-      font-size: 20 rpx;
-      margin-left: 20 rpx;
+      font-size: 20rpx;
+      margin-left: 20rpx;
     }
   }
 
   .btnsarch {
-    width: 470 rpx;
-    height: 50 rpx;
+    width: 470rpx;
+    height: 50rpx;
     display: flex;
     box-sizing: border-box;
 
     input {
-      width: 320 rpx;
-      height: 40 rpx;
-      border: 2 rpx solid #c5464a;
-      padding: 2 rpx 4 rpx 2 rpx 10 rpx;
-      border-radius: 5 rpx;
+      width: 320rpx;
+      height: 40rpx;
+      border: 2rpx solid #c5464a;
+      padding: 2rpx 4rpx 2rpx 10rpx;
+      border-radius: 5rpx;
       background: transparent;
     }
 
     button {
-      height: 50 rpx;
+      height: 50rpx;
       width: auto;
       cursor: pointer;
-      margin-left: 20 rpx;
+      margin-left: 20rpx;
       background: #c5464a;
-      font-size: 24 rpx;
-      line-height: 50 rpx;
+      font-size: 24rpx;
+      line-height: 50rpx;
       color: #F9F0DA;
     }
 
@@ -243,15 +243,15 @@ export default {
 
 
 .btn {
-  margin-left: 295 rpx;
+  margin-left: 295rpx;
 }
 
 .over {
   width: 100%;
-  height: 50 rpx;
+  height: 50rpx;
   text-align: center;
-  line-height: 50 rpx;
-  font-size: 28 rpx;
+  line-height: 50rpx;
+  font-size: 28rpx;
   color: #aaaaaa;
 }
 </style>

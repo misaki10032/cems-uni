@@ -60,7 +60,7 @@
           newUserHouse: "",
           newDec: ""
         },
-        img: "/static/pics/2.jpg",
+        img: "https://img1.baidu.com/it/u=1182459655,2369734023&fm=26&fmt=auto&gp=0.jpg",
         flag: true,
         dflag: true,
         array: ['男', '女'],
@@ -174,7 +174,7 @@
 					data: this.info,
 					method: "POST",
 					success: res => {
-						
+
 						if (res.data.code == 200) {
 							uni.showToast({
 								title: res.data.msg,

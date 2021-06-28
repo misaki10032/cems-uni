@@ -46,7 +46,7 @@
 			}
 		},
 		{
-			"path": "pages/message/taskStatus/taskStatus",
+			"path": "pages/message/myTask/myTask",
 			"style": {
 				"navigationBarTitleText": "我的任务"
 			}
@@ -58,9 +58,9 @@
 			}
 		},
 		{
-			"path": "pages/message/activityCenter/activityCenter",
+			"path": "pages/message/nearBy/nearBy",
 			"style": {
-				"navigationBarTitleText": "活动中心"
+				"navigationBarTitleText": "附近的人"
 			}
 		},
 		{

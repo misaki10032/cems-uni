@@ -25,20 +25,20 @@
 			return {
 				msg: "你居然一条消息都没有",
 				nav: [{
-          "title": "我的任务",
-          "icon": "/static/message/taskStatus.png",
-          "url": "/pages/message/taskStatus/taskStatus"
-        },
-          {
-            "title": "系统消息",
-            "icon": "/static/message/systemMsg.png",
-            "url": "/pages/message/systemMsg/systemMsg"
-          },
-          {
-            "title": "附近的人",
-            "icon": "/static/message/activityCenter.png",
-            "url": "/pages/message/activityCenter/activityCenter"
-          }
+						"title": "我的任务",
+						"icon": "https://img2.baidu.com/it/u=1290853670,1951954233&fm=26&fmt=auto&gp=0.jpg",
+						"url": "/pages/message/myTask/myTask"
+					},
+					{
+						"title": "系统消息",
+						"icon": "https://img1.baidu.com/it/u=3589648237,1000920097&fm=26&fmt=auto&gp=0.jpg",
+						"url": "/pages/message/systemMsg/systemMsg"
+					},
+					{
+						"title": "附近的人",
+						"icon": "https://img1.baidu.com/it/u=944396301,1632317689&fm=26&fmt=auto&gp=0.jpg",
+						"url": "/pages/message/nearBy/nearBy"
+					}
 				],
 				msgs: [
 
@@ -47,9 +47,9 @@
 		},
 		onShow() {
 			var user = uni.getStorageSync("loginUser");
-			if(user==null||user==""||user.userPname==null||user.userPname==""){
+			if (user == null || user == "" || user.userPname == null || user.userPname == "") {
 				uni.navigateTo({
-					url:"/pages/login/login"
+					url: "/pages/login/login"
 				})
 			}
 		},
@@ -90,13 +90,14 @@
 			}
 		}
 	}
-	
-	.tip{
-		image{
+
+	.tip {
+		image {
 			width: 650rpx;
 			height: 450rpx;
 			margin: 10rpx auto;
 		}
+
 		font-size: 30rpx;
 		text-align: center;
 		margin-top: 350rpx;
