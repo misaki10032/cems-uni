@@ -4,12 +4,12 @@
 			<view class="bg">
 				<view class="box">
 					<view class="box-hd">
-            <view class="avator" @click="toMyself">
-              <img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
-            </view>
-            <view class="phone-number">{{ user.userPname }}</view>
-            <view class="role">{{ user.userRole }}</view>
-          </view>
+						<view class="avator" @click="toMyself">
+							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
+						</view>
+						<view class="phone-number">{{ user.userPname }}</view>
+						<view class="role">{{ user.userRole }}</view>
+					</view>
 					<view class="nav">
 						<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">
 							<view>{{n.num}}</view>
@@ -21,24 +21,23 @@
 		</view>
 		<view class="list-content">
 			<view class="list">
-        <view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
-          <view>
-            {{ hm.title }}
-            <text>></text>
-          </view>
-        </view>
-        <view class="li" @click="open">
-          <uni-popup ref="popup" type="dialog">
-            <uni-popup-dialog :before-close="true" :duration="2000" content="确定退出?" message="成功消息" mode="base"
-                              type="error" @close="close" @confirm="confirm"></uni-popup-dialog>
-          </uni-popup>
-          <view>退出登录
-            <text>></text>
-          </view>
-        </view>
-
-      </view>
+				<view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
+					<view>
+						{{ hm.title }}
+						<text>></text>
+					</view>
+				</view>
+				<view class="li" @click="open">
+					<view>退出登录
+						<text>></text>
+					</view>
+				</view>
+			</view>
 		</view>
+		<uni-popup ref="popup" type="dialog">
+			<uni-popup-dialog mode="base" message="成功消息" content="确定要退出?" :duration="2000" :before-close="true"
+				@close="close" @confirm="confirm"></uni-popup-dialog>
+		</uni-popup>
 	</view>
 
 </template>
@@ -47,29 +46,28 @@
 	export default {
 		data() {
 			return {
-        headImg: {},
-        menu: [
-          {
-            "title": "我的帖子",
-            "url": "/pages/aboutUs/aboutUs"
-          },
-          {
-            "title": "我的评论",
-            "url": "/pages/aboutUs/aboutUs"
-          },
-          {
-            "title": "账号安全",
-            "url": "/pages/safe/safe"
-          },
-          {
-            "title": "权限申请",
-            "url": "/pages/safe/safe"
-          },
-          {
-            "title": "关于我们",
-            "url": "/pages/aboutUs/aboutUs"
-          }
-        ],
+				headImg: {},
+				menu: [{
+						"title": "我的帖子",
+						"url": "/pages/aboutUs/aboutUs"
+					},
+					{
+						"title": "我的评论",
+						"url": "/pages/aboutUs/aboutUs"
+					},
+					{
+						"title": "账号安全",
+						"url": "/pages/safe/safe"
+					},
+					{
+						"title": "权限申请",
+						"url": "/pages/safe/safe"
+					},
+					{
+						"title": "关于我们",
+						"url": "/pages/aboutUs/aboutUs"
+					}
+				],
 				nav: [{
 						"title": "我关注的",
 						"num": 0,
@@ -91,21 +89,21 @@
 						"url": "/pages/home/currentMenu/moneyCheat/moneyCheat"
 					}
 				],
-				user:uni.getStorageSync("loginUser")
+				user: uni.getStorageSync("loginUser")
 			}
 		},
 		onShow() {
 			/* 页面加载*/
 			var user = uni.getStorageSync("loginUser");
-			if(user==null||user==""||user.userPname==null||user.userPname==""){
+			if (user == null || user == "" || user.userPname == null || user.userPname == "") {
 				uni.navigateTo({
-					url:"/pages/login/login"
+					url: "/pages/login/login"
 				})
 				return
 			}
-			if(user.userRole=='complete'){
+			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
-			}else{
+			} else {
 				user.userRole = "代理人";
 			}
 			this.user = user;
@@ -119,62 +117,49 @@
 			alert("真的没有了哟~")
 		},
 		methods: {
-			logOut(){
+			open() {
+				this.$refs.popup.open()
+			},
+			close() {
+				this.$refs.popup.close()
+			},
+			confirm() {
+				this.$refs.popup.close()
+				uni.clearStorageSync();
+				uni.redirectTo({
+					url: '/pages/login/login'
+				})
+			},
+			/* logOut() {
 				uni.showModal({
 					title: "温馨提示",
 					content: "您确定要退出吗",
 					showCancel: true,
 					confirmColor: "#DD524D",
 					success: res => {
-						if(res.confirm){
-              uni.clearStorageSync();
-              uni.redirectTo({
-                url: '/pages/login/login'
-              })
-            }
-            if (res.cancel) {
-              return
-            }
-          },
-        })
-      },
-      open() {
-        this.$refs.popup.open()
-      },
-      /**
-       * 点击取消按钮触发
-       * @param {Object} done
-       */
-      close() {
-        // TODO 做一些其他的事情，before-close 为true的情况下，手动执行 close 才会关闭对话框
-        // ...
-        this.$refs.popup.close()
-      },
-      /**
-       * 点击确认按钮触发
-       * @param {Object} done
-       * @param {Object} value
-       */
-      confirm(value) {
-        // 输入框的值
-        console.log(value)
-        // TODO 做一些其他的事情，手动执行 close 才会关闭对话框
-        // ...
-        this.$refs.popup.close()
-      }
-
-
-      , toTask() {
-        uni.switchTab({
-          url: '/pages/task/task'
-        })
-      },
-      toUrl(url) {
-        uni.navigateTo({
-          url
-        })
-      },
-      toMyself() {
+						if (res.confirm) {
+							uni.clearStorageSync();
+							uni.redirectTo({
+								url: '/pages/login/login'
+							})
+						}
+						if (res.cancel) {
+							return
+						}
+					},
+				})
+			}, */
+			toTask() {
+				uni.switchTab({
+					url: '/pages/task/task'
+				})
+			},
+			toUrl(url) {
+				uni.navigateTo({
+					url
+				})
+			},
+			toMyself() {
 				uni.navigateTo({
 					url: "/pages/home/myself/myself"
 				})
@@ -200,7 +185,6 @@
 </script>
 
 <style lang="scss">
-
 	page {
 		background-color: #f1f1f1;
 		font-size: 30upx;
@@ -220,17 +204,17 @@
 	}
 
 	.box {
-    width: 650 upx;
-    height: 300 upx;
-    border-radius: 20 upx;
-    margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 5 upx 20 upx 0 upx rgba(0, 0, 150, .2);
+		width: 650 upx;
+		height: 300 upx;
+		border-radius: 20 upx;
+		margin: 0 auto;
+		background: #fff;
+		box-shadow: 0 5 upx 20 upx 0 upx rgba(0, 0, 150, .2);
 
-    /* 导航 */
-    .nav {
-      display: flex;
-      border-bottom: 1 rpx solid #eee;
+		/* 导航 */
+		.nav {
+			display: flex;
+			border-bottom: 1 rpx solid #eee;
 
 			/* 图标+文字 */
 			.nav_item {
@@ -271,6 +255,7 @@
 				text-align: center;
 				font-size: 40rpx;
 			}
+
 			.role {
 				text-align: center;
 				font-size: 20rpx;
@@ -328,8 +313,8 @@
 		&:last-child {
 			border: none;
 		}
-		
-		view:nth-child(1){
+
+		view:nth-child(1) {
 			margin-top: 40rpx;
 		}
 
@@ -346,14 +331,14 @@
 				right: 30rpx;
 				color: #ccc;
 			}
-			
+
 
 			text {
 				position: absolute;
 				right: 30rpx;
 				color: #ccc;
 			}
-			
+
 			&.noborder {
 				border-bottom: 0
 			}
