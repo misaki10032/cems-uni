@@ -134,6 +134,12 @@
 			"style": {
 				"navigationBarTitleText": "设置新密码"
 			}
+		},
+		{
+			"path": "pages/safe/chaPass",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
