@@ -172,7 +172,7 @@ export default {
 			margin-top: 20rpx;
 			/* 热门单子 */
 				.recommend_tasks_title {
-					height: 80rpx;
+          height: 80 rpx;
           line-height: 80 rpx;
           font-size: 50 rpx;
           color: #b50e03;

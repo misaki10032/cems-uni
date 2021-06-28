@@ -29,16 +29,16 @@
           "icon": "/static/message/taskStatus.png",
           "url": "/pages/message/taskStatus/taskStatus"
         },
-					{
-						"title": "系统消息",
-						"icon": "/static/message/systemMsg.png",
-						"url": "/pages/message/systemMsg/systemMsg"
-					},
-					{
-						"title": "活动中心",
-						"icon": "/static/message/activityCenter.png",
-						"url": "/pages/message/activityCenter/activityCenter"
-					}
+          {
+            "title": "系统消息",
+            "icon": "/static/message/systemMsg.png",
+            "url": "/pages/message/systemMsg/systemMsg"
+          },
+          {
+            "title": "附近的人",
+            "icon": "/static/message/activityCenter.png",
+            "url": "/pages/message/activityCenter/activityCenter"
+          }
 				],
 				msgs: [
 

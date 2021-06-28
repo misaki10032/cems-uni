@@ -21,13 +21,17 @@
 		</view>
 		<view class="list-content">
 			<view class="list">
-				<view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
-					<view>
-						{{hm.title}}
-						<text>></text>
-					</view>
-				</view>
-				<view class="li" @click="logOut">
+        <view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
+          <view>
+            {{ hm.title }}
+            <text>></text>
+          </view>
+        </view>
+        <view class="li" @click="open">
+          <uni-popup ref="popup" type="dialog">
+            <uni-popup-dialog :before-close="true" :duration="2000" content="确定退出?" message="成功消息" mode="base"
+                              type="error" @close="close" @confirm="confirm"></uni-popup-dialog>
+          </uni-popup>
           <view>退出登录
             <text>></text>
           </view>
@@ -123,30 +127,54 @@
 					confirmColor: "#DD524D",
 					success: res => {
 						if(res.confirm){
-							uni.clearStorageSync();
-							uni.redirectTo({
-								url: '/pages/login/login'
-							})
-						}
-						if(res.cancel){
-							return
-						}
-					},
-					
-				})
-				
-			},
-			toTask() {
-				uni.switchTab({
-					url: '/pages/task/task'
-				})
-			},
-			toUrl(url) {
-				uni.navigateTo({
-					url
-				})
-			},
-			toMyself() {
+              uni.clearStorageSync();
+              uni.redirectTo({
+                url: '/pages/login/login'
+              })
+            }
+            if (res.cancel) {
+              return
+            }
+          },
+        })
+      },
+      open() {
+        this.$refs.popup.open()
+      },
+      /**
+       * 点击取消按钮触发
+       * @param {Object} done
+       */
+      close() {
+        // TODO 做一些其他的事情，before-close 为true的情况下，手动执行 close 才会关闭对话框
+        // ...
+        this.$refs.popup.close()
+      },
+      /**
+       * 点击确认按钮触发
+       * @param {Object} done
+       * @param {Object} value
+       */
+      confirm(value) {
+        // 输入框的值
+        console.log(value)
+        // TODO 做一些其他的事情，手动执行 close 才会关闭对话框
+        // ...
+        this.$refs.popup.close()
+      }
+
+
+      , toTask() {
+        uni.switchTab({
+          url: '/pages/task/task'
+        })
+      },
+      toUrl(url) {
+        uni.navigateTo({
+          url
+        })
+      },
+      toMyself() {
 				uni.navigateTo({
 					url: "/pages/home/myself/myself"
 				})
