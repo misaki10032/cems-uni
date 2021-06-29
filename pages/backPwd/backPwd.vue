@@ -31,7 +31,7 @@
     computed: {},
     methods: {
       next() {
-        if (this.mobile == '' || this.mobile == undefined || this.mobile == null) {
+        if (this.mobile == null||this.mobile === '' || this.mobile === undefined) {
           uni.showToast({
             icon: 'none',
             title: '请输入手机号'
@@ -46,7 +46,7 @@
 					});
           return;
         }
-        if (this.email == '' || this.email == undefined || this.email == null) {
+        if (this.email == null || this.email === '' || this.email === undefined ) {
           uni.showToast({
             icon: 'none',
             title: '请输入邮箱'
