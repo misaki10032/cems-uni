@@ -3,23 +3,19 @@
 		<view class="header">
 			<view class="bg">
 				<view class="box">
-					<view class="box-hd">
+					<view class="box-hd" style="background-color: #b50e03">
 						<view class="avator" @click="toMyself">
-							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">						
-						</view>
-						<view class="phone-number">{{ user.userPname }}</view>
-						<view class="role">{{ user.userRole }}</view>
-					</view>
-					<view class="nav">
-						<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">
-							<view>{{n.num}} </view>
-							<view>{{n.title}}</view>
+							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<view class="list-content">
+			姓名：{{ user.userPname }}   职责：{{ user.userRole }}
+			<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">		
+				<view> {{n.title}}: {{n.num}}元</view>
+			</view>
 			<view class="list">
 				<view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
 					<view>
@@ -27,16 +23,15 @@
 						<text>></text>
 					</view>
 				</view>
-				<view class="li" @click="open">
-					<view>退出登录
-						<text>></text>
-					</view>
+			
+			<view class="li" @click="open">
+					<button type="b" >升级权限 需{{upMoney}}元</button>
 				</view>
 			</view>
 		</view>
 		<uni-popup ref="popup" type="dialog">
-			<uni-popup-dialog mode="base" message="成功消息" content="确定要退出?" :duration="2000" :before-close="true"
-				@close="close" @confirm="confirm">
+			<uni-popup-dialog mode="base" message="成功消息" content="您目前是:代理人 是否升级为委托人?" :duration="2000"
+				:before-close="true" @close="close" @confirm="confirm">
 			</uni-popup-dialog>
 		</uni-popup>
 	</view>
@@ -48,63 +43,20 @@
 		data() {
 			return {
 				headImg: {},
-				money:0,
-				menu: [{
-						"title": "我的帖子",
-						"url": "/pages/aboutUs/aboutUs"
-					},
-					{
-						"title": "我的评论",
-						"url": "/pages/aboutUs/aboutUs"
-					},
-					{
-						"title": "账号安全",
-						"url": "/pages/safe/safe"
-					},
-					{
-						"title": "权限申请",
-						"url": "/pages/power/power"
-					},
-					{
-						"title": "关于我们",
-						"url": "/pages/aboutUs/aboutUs"
-					}
-				],
+				money: uni.getStorageSync("loginUser").userMoney,
+				userRole: uni.getStorageSync("loginUser").userRole,
+				upMoney: 100,
 				nav: [{
-						"title": "我关注的",
-						"num": 0,
-						"url": "/pages/home/currentMenu/attention/attention"
-					},
-					{
-						"title": "被关注",
-						"num": 0,
-						"url": "/pages/home/currentMenu/unattention/unattention"
-					},
-					{
-						"title": "足迹",
-						"num": 0,
-						"url": "/pages/home/currentMenu/footPrints/footPrints"
-					},
-					{
-						"title": "余额",
-						"num": 0,
-						"url": "/pages/home/currentMenu/moneyCheat/moneyCheat"
-					}
-				],
+					"title": "余额",
+					"num": uni.getStorageSync("loginUser").userMoney,
+					"url": "/pages/home/currentMenu/moneyCheat/moneyCheat"
+				}],
 				user: uni.getStorageSync("loginUser")
 			}
 		},
 		onShow() {
 			/* 页面加载*/
 			var user = uni.getStorageSync("loginUser");
-			if (user == null || user == "" || user.userPname == null || user.userPname == "") {
-				uni.navigateTo({
-					url: "/pages/login/login"
-				})
-				return
-			}
-			this.money = user.userMoney;
-			this.nav[3].num = user.userMoney;
 			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
 			} else {
@@ -117,11 +69,23 @@
 			console.log("下拉刷新")
 			uni.stopPullDownRefresh()
 		},
-		onReachBottom() {
-			alert("真的没有了哟~")
-		},
 		methods: {
 			open() {
+				if (this.userRole == "complete") {
+					uni.showToast({
+						icon: "loading",
+						title: "不可升级"
+					})
+					return
+				}
+				if (this.money < this.upMoney) {
+					uni.showToast({
+						icon: "loading",
+						title: "余额不足"
+					})
+					return
+				}
+
 				this.$refs.popup.open()
 			},
 			close() {
@@ -129,10 +93,42 @@
 			},
 			confirm() {
 				this.$refs.popup.close()
-				uni.clearStorageSync();
-				uni.redirectTo({
-					url: '/pages/login/login'
-				})
+
+				this.$myRequest({
+					url: '/upUserRole',
+					data: {
+						id: this.user.userId,
+						userRole: this.userRole,
+						money: this.money,
+						upMoney: this.upMoney
+					},
+					method: 'POST',
+					dataType: 'json',
+					success: (res) => {
+						console.log(res);
+						if (res.data.code == 200) {
+							uni.showToast({
+								title: "成功支付100￥",
+								icon: 'loading'
+							});
+							setTimeout(() => {
+								var user = uni.getStorageSync("loginUser");
+								user.userMoney = user.userMoney - 100;
+								user.userRole = "complete"
+								uni.setStorageSync("loginUser", user);
+								uni.switchTab({
+									url: "../home/home"
+								})
+							}, 1000)
+						} else if (res.data.code == 500) {
+							uni.showToast({
+								title: "服务器异常，稍后重试",
+								icon: "loading"
+							});
+
+						}
+					}
+				});
 			},
 			toTask() {
 				uni.switchTab({
@@ -144,27 +140,11 @@
 					url
 				})
 			},
-			toMyself() {
-				uni.navigateTo({
-					url: "/pages/home/myself/myself"
-				})
-			},
 			toDetials(url) {
 				uni.navigateTo({
 					url
 				})
 			},
-			chooseImg() {
-				uni.chooseImage({
-					count: 1,
-					success: res => {
-						this.headImg = res.tempFilePaths
-					},
-					fail() {
-						alert("系统繁忙，稍后再试")
-					}
-				})
-			}
 		}
 	}
 </script>
@@ -177,7 +157,7 @@
 
 	.header {
 		background: #fff;
-		height: 290upx;
+		height: 190upx;
 		padding-bottom: 110upx;
 
 		.bg {
