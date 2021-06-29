@@ -26,7 +26,7 @@
 				</uni-col>
 				<uni-col :span="10" style="margin: 30rpx 15rpx 15rpx 20rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
 					<uni-col :span="24">
-						<image style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+						<image @click="toMoneyBag" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
 							src="https://img1.baidu.com/it/u=3791475311,1796836284&fm=11&fmt=auto&gp=0.jpg">
 						</image>
 					</uni-col>
@@ -49,7 +49,7 @@
 				</uni-col>
 				<uni-col :span="10" style="margin: 20rpx 15rpx 15rpx 20rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
 					<uni-col :span="24">
-						<image  @click="toMyPrincipal" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+						<image  @click="toPower" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
 							src="https://img2.baidu.com/it/u=3654785619,4022428638&fm=26&fmt=auto&gp=0.jpg">
 						</image>
 					</uni-col>
@@ -82,9 +82,14 @@
 					url: "/pages/home/myself/myself"
 				})
 			},
-			toMyPrincipal() {
+			toPower(){
 				uni.navigateTo({
-					url: "/pages/message/myTask/myEntrust"
+					url: "/pages/power/power"
+				})
+			},
+			toMoneyBag(){
+				uni.navigateTo({
+					url: "/pages/home/currentMenu/moneyCheat/moneyCheat"
 				})
 			}
 		}

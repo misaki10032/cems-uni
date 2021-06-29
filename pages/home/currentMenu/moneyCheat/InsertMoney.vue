@@ -70,6 +70,14 @@
 				this.flag = false
 			},		
 			insertMoney(money) {
+				var moneyTest = /^\d*$/;
+				if(!moneyTest.test(money)){
+					uni.showToast({
+						title:"金额只能是整数哦!",
+						icon:"none"
+					})
+					return
+				}
 				this.payMoney = money
 				this.content = "您确定要充值" + this.payMoney + "?"
 				this.open()

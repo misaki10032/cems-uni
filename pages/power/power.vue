@@ -4,31 +4,47 @@
 			<view class="bg">
 				<view class="box">
 					<view class="box-hd" style="background-color: #b50e03">
-						<view class="avator" @click="toMyself">
+						<view class="avator">
 							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
-		<view class="list-content">
-			姓名：{{ user.userPname }}   职责：{{ user.userRole }}
-			<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">		
-				<view> {{n.title}}: {{n.num}}元</view>
-			</view>
-			<view class="list">
-				<view class="li" v-for="(hm,index) in menu" :key="index" @click="toUrl(hm.url)">
-					<view>
-						{{ hm.title }}
-						<text>></text>
-					</view>
-				</view>
-			
-			<view class="li" @click="open">
-					<button type="b" >升级权限 需{{upMoney}}元</button>
-				</view>
-			</view>
-		</view>
+
+		<uni-row style="text-align: center;">
+			<uni-col :span="24" style="width: 650rpx;background-color: #FFFFFF;border-radius: 35rpx;margin: 20rpx 50rpx;" >
+				<uni-col :span="24" style="border-bottom: 1rpx solid #d4d4d4;padding: 10rpx;">
+					<uni-col :span="7" style="text-align: right;">
+						<uni-icons type="person"></uni-icons>
+					</uni-col>
+					<uni-col :span="16" :offset="1" style="text-align: left;">
+						<text style="text-align: left;">昵称&nbsp;:&nbsp;{{ user.userPname }}</text>
+					</uni-col>	
+				</uni-col>
+				<uni-col :span="24" style="border-bottom: 1rpx solid #d4d4d4;padding: 20rpx;" >
+					<uni-col :span="7" style="text-align: right;">
+						<uni-icons type="paperclip"></uni-icons>
+					</uni-col>
+					<uni-col :span="16" :offset="1" style="text-align: left;">
+						<text style="text-align: left;">权限&nbsp;:&nbsp;{{ user.userRole }}</text>
+					</uni-col>
+				</uni-col>
+				<uni-col :span="24" style="padding: 10rpx;">
+					<uni-col :span="7" style="text-align: right;">
+						<uni-icons type="cart"></uni-icons>
+					</uni-col>
+					<uni-col :span="16" :offset="1" style="text-align: left;">
+						<text style="text-align: left;">余额&nbsp;:&nbsp;{{ user.userMoney }}</text>
+					</uni-col>
+				</uni-col>
+			</uni-col>
+			<uni-col :span="20" :offset="2">
+				<button type="primary" style="border-radius: 35rpx;" @click="open">
+					升级权限
+				</button>
+			</uni-col>
+		</uni-row>
 		<uni-popup ref="popup" type="dialog">
 			<uni-popup-dialog mode="base" message="成功消息" content="您目前是:代理人 是否升级为委托人?" :duration="2000"
 				:before-close="true" @close="close" @confirm="confirm">
@@ -73,8 +89,8 @@
 			open() {
 				if (this.userRole == "complete") {
 					uni.showToast({
-						icon: "loading",
-						title: "不可升级"
+						icon: "closeempty",
+						title: "权限已达到!"
 					})
 					return
 				}
@@ -123,7 +139,7 @@
 						} else if (res.data.code == 500) {
 							uni.showToast({
 								title: "服务器异常，稍后重试",
-								icon: "loading"
+								icon: "none"
 							});
 
 						}
@@ -170,7 +186,7 @@
 
 	.box {
 		width: 650 upx;
-		height: 300 upx;
+		height: 200 upx;
 		border-radius: 20 upx;
 		margin: 0 auto;
 		background: #fff;

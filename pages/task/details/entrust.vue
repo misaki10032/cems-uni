@@ -30,7 +30,7 @@
 		data() {
 			return {
 				formData: {
-					id: uni.getStorageSync("loginUser").userId,
+					id: "",
 					type: "",
 					data: '',
 					money: "",
@@ -94,6 +94,14 @@
 			}
 		},
 		onShow() {
+			var user = uni.getStorageSync("loginUser");
+			if (user == null || user == "" || user.userPname == null || user.userPname == "") {
+				uni.navigateTo({
+					url: "/pages/login/login"
+				})
+				return
+			}
+			this.formData.id = user.userId;
 			this.getAllEntrustType()
 		},
 		methods: {
@@ -123,9 +131,6 @@
 				this.$refs[form].submit()
 					.then(res => {
 						console.log('表单的值：', res)
-						uni.showToast({
-							title: '验证成功'
-						})
 						this.$myRequest({
 							url: "/addEntrust",
 							data: {
@@ -144,19 +149,41 @@
 										title: "发布成功",
 										icon: "success"
 									})
+									uni.removeStorageSync("loginUser");
+									uni.setStorageSync("loginUser",res.data.loginUser);
 									setTimeout(() => {
 										uni.navigateBack({
 											animationType: "slide-out-bottom"
 										})
 									},1500)
-								}else {
-									setTimeout(() => {
+								}else if(res.data.code == 501){
 										uni.showToast({
-											title: "网络异常",
+											title: "您的余额不足!",
 											icon: "loading"
 										})
+									setTimeout(() => {
+										uni.navigateTo({
+											url:"/pages/home/currentMenu/moneyCheat/InsertMoney"
+										})
 									},1500)
-									uni.hideToast()
+								}else if(res.data.code == 502){
+									uni.showToast({
+										title: res.data.msg,
+										icon: "loading"
+									})
+									setTimeout(() => {
+										uni.navigateTo({
+											url:"/pages/power/power"
+										})
+									},1500)
+								}else {
+									uni.showToast({
+										title: "网络异常",
+										icon: "loading"
+									})
+									setTimeout(() => {
+										uni.hideToast()
+									},1500)
 								}
 							}
 						})

@@ -20,7 +20,7 @@
 		data() {
 			return {
 				formData: {
-					id: uni.getStorageSync("loginUser").userId,
+					id: "",
 					title: "",
 					data: ''
 				},
@@ -53,6 +53,16 @@
 					}
 				}
 			}
+		},
+		onShow(){
+			var user = uni.getStorageSync("loginUser");
+			if (user == null || user == "" || user.userPname == null || user.userPname == "") {
+				uni.navigateTo({
+					url: "/pages/login/login"
+				})
+				return
+			}
+			this.formData.id = user.userId;
 		},
 		methods: {
 			submitForm(form) {

@@ -104,7 +104,7 @@
 				return
 			}
 			this.money = user.userMoney;
-			this.nav[3].num = user.userMoney;
+			this.nav[3].num = user.userMoney+".00";
 			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
 			} else {

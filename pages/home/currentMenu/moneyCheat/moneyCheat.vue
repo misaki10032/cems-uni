@@ -63,7 +63,7 @@
 					{
 						"title": "我的委托",
 						"icon": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fpic.51yuansu.com%2Fpic2%2Fcover%2F00%2F44%2F59%2F5814b3d8736cf_610.jpg&refer=http%3A%2F%2Fpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627528347&t=a472f4256ae053b65fafd93cb2a98c01",
-						"url": "/pages/"
+						"url": "/pages/message/myTask/myEntrust"
 					},
 					{
 						"title": "附近的人",
