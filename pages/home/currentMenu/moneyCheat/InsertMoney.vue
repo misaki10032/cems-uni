@@ -107,7 +107,7 @@
 		}
 		
 		.money_btn {
-			margin: 60rpx 30rpx;
+			margin: 20rpx 30rpx;
 			height: 160rpx;
 			padding: 35rpx 20rpx;
 			border-radius: 20rpx;
