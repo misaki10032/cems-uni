@@ -102,7 +102,7 @@
 		{
 			"path": "pages/home/currentMenu/moneyCheat/moneyCheat",
 			"style": {
-				"navigationBarTitleText": "代金券"
+				"navigationBarTitleText": "我的金额"
 			}
 		},
 		{
@@ -163,6 +163,12 @@
 			"path": "pages/power/power",
 			"style": {
 				"navigationBarTitleText": "权限申请"
+			}
+		},
+		{
+			"path": "pages/home/currentMenu/moneyCheat/InsertMoney",
+			"style": {
+				"navigationBarTitleText": "充值中心"
 			}
 		}
 	],
