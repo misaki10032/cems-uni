@@ -152,6 +152,12 @@
 			"style": {
 				"navigationBarTitleText": "发布帖子"
 			}
+		},
+		{
+			"path": "pages/power/power",
+			"style": {
+				"navigationBarTitleText": "权限申请"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。

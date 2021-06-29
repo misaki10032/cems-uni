@@ -48,6 +48,7 @@
 		data() {
 			return {
 				headImg: {},
+				money:0,
 				menu: [{
 						"title": "我的帖子",
 						"url": "/pages/aboutUs/aboutUs"
@@ -62,7 +63,7 @@
 					},
 					{
 						"title": "权限申请",
-						"url": "/pages/safe/safe"
+						"url": "/pages/power/power"
 					},
 					{
 						"title": "关于我们",
@@ -86,7 +87,7 @@
 					},
 					{
 						"title": "余额",
-						"num": uni.getStorageSync("loginUser").userMoney,
+						"num": 0,
 						"url": "/pages/home/currentMenu/moneyCheat/moneyCheat"
 					}
 				],
@@ -102,6 +103,8 @@
 				})
 				return
 			}
+			this.money = user.userMoney;
+			this.nav[3].num = user.userMoney;
 			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
 			} else {
