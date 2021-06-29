@@ -12,7 +12,7 @@
 			</view>
 		</view>
 		<view class="list-content">
-			姓名：{{ user.userPname }}  职责：{{ user.userRole }}
+			姓名：{{ user.userPname }}   职责：{{ user.userRole }}
 			<view class="nav_item" v-for="(n,index) in nav" :key="index" @click="toDetials(n.url)">		
 				<view> {{n.title}}: {{n.num}}元</view>
 			</view>
