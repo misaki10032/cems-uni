@@ -52,6 +52,12 @@
 			}
 		},
 		{
+			"path": "pages/message/myTask/myEntrust",
+			"style": {
+				"navigationBarTitleText": "我的委托"
+			}
+		},
+		{
 			"path": "pages/message/systemMsg/systemMsg",
 			"style": {
 				"navigationBarTitleText": "系统消息"

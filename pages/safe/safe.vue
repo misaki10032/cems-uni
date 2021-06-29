@@ -5,7 +5,7 @@
 				<view class="box">
 					<view class="box-hd" style="background-color: #b50e03">
 						<view class="avator">							
-							<img src="https://img0.baidu.com/it/u=387321899,1968228181&fm=26&fmt=auto&gp=0.jpg">
+							<img src="https://img0.baidu.com/it/u=3823235082,344680956&fm=26&fmt=auto&gp=0.jpg">
 						</view>
 					</view>
 				</view>
@@ -13,7 +13,51 @@
 		</view>
 	
 		<view >
-			<button type="primary" @click="infoUpd">修改密码</button>
+			<uni-row style="text-align: center;">
+				<uni-col :span="10" style="margin: 30rpx 20rpx 15rpx 40rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
+					<uni-col :span="24">
+						<image  @click="infoUpd" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+							src="https://img0.baidu.com/it/u=242412557,375512836&fm=26&fmt=auto&gp=0.jpg">
+						</image>
+					</uni-col>
+					<uni-col :span="24">
+						修改密码
+					</uni-col>
+				</uni-col>
+				<uni-col :span="10" style="margin: 30rpx 15rpx 15rpx 20rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
+					<uni-col :span="24">
+						<image style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+							src="https://img1.baidu.com/it/u=3791475311,1796836284&fm=11&fmt=auto&gp=0.jpg">
+						</image>
+					</uni-col>
+					<uni-col :span="24">
+						我的钱包
+					</uni-col>
+				</uni-col>
+			</uni-row>
+				
+			<uni-row style="text-align: center;">
+				<uni-col :span="10" style="margin: 20rpx 20rpx 15rpx 40rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
+					<uni-col :span="24">
+						<image @click="toMyself" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+							src="https://img0.baidu.com/it/u=2740484780,1239230878&fm=26&fmt=auto&gp=0.jpg">
+						</image>
+					</uni-col>
+					<uni-col :span="24">
+						个人信息
+					</uni-col>
+				</uni-col>
+				<uni-col :span="10" style="margin: 20rpx 15rpx 15rpx 20rpx;background-color: #fff;border-radius: 25rpx;padding:20rpx 0;">
+					<uni-col :span="24">
+						<image  @click="toMyPrincipal" style="border-radius: 30px;width: 150rpx;height: 150rpx;border-radius: 360rpx;"
+							src="https://img2.baidu.com/it/u=3654785619,4022428638&fm=26&fmt=auto&gp=0.jpg">
+						</image>
+					</uni-col>
+					<uni-col :span="24">
+						权限升级
+					</uni-col>
+				</uni-col>
+			</uni-row>
 		</view>
 	</view>
 
@@ -33,6 +77,16 @@
 					url: "/pages/safe/chaPass"
 				})
 			},
+			toMyself() {
+				uni.navigateTo({
+					url: "/pages/home/myself/myself"
+				})
+			},
+			toMyPrincipal() {
+				uni.navigateTo({
+					url: "/pages/message/myTask/myEntrust"
+				})
+			}
 		}
 	}
 </script>

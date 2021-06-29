@@ -41,12 +41,15 @@
 				info: [],
 				attentionId: "",
 				position:{
-					userId:uni.getStorageSync("loginUser").userId
+					userId:uni.getStorageSync("loginUser").userId,
+					userAddress:"",
+					userLongitude:"",
+					userLatitude:""
 				}
 			}
 		},
 		onLoad(){
-			this.getOtherPeople();
+			this.getUserPosition(this.position.userId);
 		},
 		methods: {
 			open(id) {
@@ -90,9 +93,14 @@
 						console.log(res)
 						if (res.data.code != 200) {
 							uni.showToast({
-								title:res.data.msg,
+								title:res.data.userMsg,
 								icon:'none'
 							})
+							setTimeout(()=>{
+								uni.switchTab({
+									url:"../message"
+								});
+							},1000);
 						} else {
 							uni.showToast({
 								title:res.data.userMsg,
@@ -100,6 +108,50 @@
 							})
 							this.info = res.data.list
 						}
+					}
+				});
+			},
+			getUserPosition(userId){
+				var that = this;
+				uni.getLocation({
+					type:'gcj02',
+					geocode:true,
+					success: function (res) {
+						var add = res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						that.position.userAddress = add;
+						that.position.userLatitude = res.latitude;
+						that.position.userLongitude = res.longitude;
+						that.setPosition(userId);
+					}
+				})
+			},
+			setPosition(userId){
+				var that = this;
+				console.log(this.position)
+				this.$myRequest({
+					url: '/setUserPosition',
+					data: {
+						userId: this.position.userId,
+						longitude: this.position.userLongitude,
+						latitude:this.position.userLatitude,
+						userInfo:this.position.userAddress
+					},
+					method: 'GET',
+					dataType: 'json',
+					success: (res) => {
+						console.log(res)
+						if (res.data.code != 200) {
+							uni.showToast({
+								title:"获取位置信息失败!",
+								icon:'none'
+							})
+							return
+						}
+						uni.showLoading({})
+						setTimeout(function(){
+							uni.hideLoading()
+							return that.getOtherPeople()
+						},2000)
 					}
 				});
 			}

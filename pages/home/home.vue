@@ -131,25 +131,6 @@
 					url: '/pages/login/login'
 				})
 			},
-			/* logOut() {
-				uni.showModal({
-					title: "温馨提示",
-					content: "您确定要退出吗",
-					showCancel: true,
-					confirmColor: "#DD524D",
-					success: res => {
-						if (res.confirm) {
-							uni.clearStorageSync();
-							uni.redirectTo({
-								url: '/pages/login/login'
-							})
-						}
-						if (res.cancel) {
-							return
-						}
-					},
-				})
-			}, */
 			toTask() {
 				uni.switchTab({
 					url: '/pages/task/task'
