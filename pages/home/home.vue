@@ -71,14 +71,14 @@
 					}
 				],
 				nav: [{
-						"title": "我关注的",
+						"title": "关注",
 						"num": 0,
-						"url": "/pages/home/currentMenu/attention/attention"
+						"url": "/pages/friend/attention/attention"
 					},
 					{
-						"title": "被关注",
+						"title": "粉丝",
 						"num": 0,
-						"url": "/pages/home/currentMenu/unattention/unattention"
+						"url": "/pages/friend/fans/fans"
 					},
 					{
 						"title": "足迹",
@@ -105,6 +105,8 @@
 			}
 			this.money = user.userMoney;
 			this.nav[3].num = user.userMoney+".00";
+			this.nav[0].num = uni.getStorageSync("foucs")
+			this.nav[1].num = uni.getStorageSync("fans")
 			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
 			} else {
