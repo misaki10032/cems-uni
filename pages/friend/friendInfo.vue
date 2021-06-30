@@ -9,10 +9,10 @@
 			</view>
 			<view class="friend-info-head-info">
 				<view class="friend-info-head-info-main">
-					<text>昵称: 大马猴</text>
+					<text>昵称: {{user.userPname}}</text>
 				</view>
 				<view class="friend-info-head-info-main">
-					<text>账号: 13619126257</text>
+					<text>账号: {{user.userPhone}}</text>
 				</view>
 				<view class="friend-info-head-info-handup" @click="plus">
 					<uni-icons type="hand-thumbsup"></uni-icons>  
@@ -24,15 +24,15 @@
 			
 			<view class="friend-info-body-other">
 				<uni-icons type="person" size="12"></uni-icons>
-				<text>男 | 22岁 | 3月12 | IT | 陕西省汉中市汉台区陕西理工大学</text>
+				<text>{{user.userName}} | 22岁 | {{user.userBirth}} | {{user.userSex}} | {{user.userHouse}}</text>
 			</view>
 			<view class="friend-info-body-other">
 				<uni-icons type="email" size="12"></uni-icons>
-				<text>1069664381@qq.con</text>
+				<text>{{user.userEmail}}</text>
 			</view>
 			<view class="friend-info-body-other">
 				<uni-icons type="chatbubble" size="12"></uni-icons>
-				<text>此用户很懒，什么都没有写</text>
+				<text>{{user.userDec}}</text>
 			</view>
 		</view>
 		<text @click="plusImg">添加图片</text>
@@ -60,14 +60,19 @@
 		data() {
 			return {
 				num : 3425,
-				pics: "https://img0.baidu.com/it/u=2311798355,2458925153&fm=26&fmt=auto&gp=0.jpg",
+				pics: "",
 				tipsFlag: true,
 				imgs: [],
 				user: {}
 			}
 		},
+		onShow(options){
+			
+		},
 		onLoad(options) {
 			this.getUserById(options.id)
+			this.pics = "https://wallpaper.infinitynewtab.com/wallpaper/"+options.id+".jpg"
+			
 		},
 		methods: {
 			plus(){
@@ -92,10 +97,14 @@
 			},
 			getUserById(id){
 				this.$myRequest({
-					url: "/",
-					method: "POST",
+					url: "/getThisUser",
+					method: "GET",
+					data:{
+						id:id
+					},
 					success: res => {
-						this.user = res.data.user
+						console.log(res.data)
+						this.user = res.data.userInfo
 					}
 				})
 			},

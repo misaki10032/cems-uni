@@ -13,7 +13,7 @@
 					</view>
 				</uni-col>
 				<uni-col class="user-info" :span="18" :offset="1">
-					<uni-col :span="24" class="user-name"><view><text>{{item.userName}}</text></view></uni-col>
+					<uni-col :span="24" class="user-name"><view><text>{{item.userPname}}</text></view></uni-col>
 					<uni-col :span="24" class="user-dec"><view><text>{{item.userDec}}</text></view></uni-col>
 				</uni-col>
 			</view>
@@ -37,9 +37,8 @@
 		},
 		methods: {
 			toUserInfo(userId){
-				uni.showToast({
-					title:"找到"+userId+"的info",
-					icon:"loading"
+				uni.navigateTo({
+					url:"/pages/friend/friendInfo?id="+userId
 				})
 			},
 			getFriend(id){

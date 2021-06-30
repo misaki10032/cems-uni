@@ -188,7 +188,6 @@
                 "enablePullDownRefresh": false
             }
 
-        }
         },
 		{
 				"path": "pages/friend/friendInfo",
