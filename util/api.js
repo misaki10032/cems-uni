@@ -1,4 +1,4 @@
-const BASEURL = "http://192.168.31.227:9999/uniApp"
+const BASEURL = "http://192.168.31.228:9999/uniApp"
 export const myRequest = (options) => {
     return new Promise((resolve, reject) => {
         uni.request({
