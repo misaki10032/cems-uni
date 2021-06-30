@@ -13,9 +13,6 @@
 			<uni-col :span="12">
 				<view class="h4">{{hm.foTitle}}</view>
 			</uni-col>
-	<!--		<uni-col :span="12">
- 				<view class="h5">{{hm.pname}}</view>
-			</uni-col> -->
 			<uni-col :span="24">
 			<uni-notice-bar :show-get-more="true" color="#555666" background-color="white" :single="true"  :text='hm.foData' @getmore="getMore" />
 			
