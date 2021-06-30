@@ -8,7 +8,23 @@
 			</swiper-item>
 		</swiper>
 		<fab :content="content"></fab>
-		<tasks :hotTasks="hotTasks"></tasks>
+		<view style="background-color: #F7F7F7;" v-for="(hm,index) in hotTasks" :key="index">
+		<uni-row v-show="hm.del" class="urow">
+			<uni-col :span="12">
+				<view class="h4">{{hm.foTitle}}</view>
+			</uni-col>
+	<!--		<uni-col :span="12">
+ 				<view class="h5">{{hm.pname}}</view>
+			</uni-col> -->
+			<uni-col :span="24">
+			<uni-notice-bar :show-get-more="true" color="#555666" background-color="white" :single="true"  :text='hm.foData' @getmore="getMore" />
+			
+			</uni-col>
+			<uni-col :span="24" >
+			<view  class="fb">{{hm.pname}}:{{hm.gmtCreate}}</view>
+			</uni-col>
+		</uni-row>
+		</view>
 		<button v-if="more_dis" class="btn" size="mini" type="default" @click="moreTask">加载更多</button>
 		<view v-if="over_dis" class="over">
 			-------我是有底线的-------
@@ -62,9 +78,15 @@
 					url
 				})
 			},
+			getMore(){
+				uni.showToast({
+					title: '点击查看更多',
+					 icon: 'none'
+				})
+			},
 			getTasks(callback) {
 				this.$myRequest({
-					url: "/getEnts?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
+					url: "/selAllArticle?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize,
 					method: "GET",
 					success: (res) => {
 						console.log(res)
@@ -108,52 +130,9 @@
 			isFlag() {
 				this.flag = !this.flag
 			},
-			bindPickerChange(res) {
-				this.isFlag()
-				this.index = res.target.value
-				if (this.index == 0) {
-					this.pageIndex = 1
-					this.hotTasks = []
-					this.more_dis = true
-					this.over_dis = false
-					this.getTasks()
-					return
-				}
-				const entPlan = this.array[this.index]
-				this.$myRequest({
-					url: "/getEntsByPlan?entPlan=" + entPlan + "&pageIndex=" + this.pageIndex + "&pageSize=" + this
-						.pageSize,
-					method: "GET",
-					success: res => {
-						console.log(res)
-						this.hotTasks = res.data.data
-						this.total = res.data.total
-					}
-				})
-			},
-			searchTasks() {
-				if (this.text == "" || this.text == null || this.text == undefined) {
-					this.pageIndex = 1
-					this.hotTasks = []
-					this.more_dis = true
-					this.over_dis = false
-					return this.getTasks()
-				}
-
-				const entPlan = this.array[this.index]
-				this.$myRequest({
-					url: "/getEntsByText?entPlan=" + entPlan + "&text=" + this.text + "&pageIndex=" + this
-						.pageIndex + "&pageSize=" + this.pageSize,
-					method: "GET",
-					success: res => {
-						this.hotTasks = res.data.data
-						this.total = res.data.total
-					}
-				})
-			}
 		},
 		components: {
-			tasks,fab
+			fab
 		}
 	}
 </script>
@@ -247,7 +226,33 @@
 
 		}
 	}
-
+	.urow{
+		margin: 10rpx;
+		background-color: white;
+	}
+.top{
+	margin: 20rpx;
+}
+.demo-uni-col {
+	height: 36px;
+	border-radius: 3px;
+	color: #545666;
+}
+.fb{
+	font-size: 20rpx;
+	text-align: right;
+	margin-left: 20rpx;
+}
+.h4{
+	    font-size: 35rpx;
+		margin-left: 20rpx;
+	    font-weight: 500;
+	    color: rgb(181, 14, 3);
+}
+.img{
+	height: 40rpx;
+	margin-right: 10px;
+}
 
 	.btn {
 		margin-left: 295rpx;
@@ -260,5 +265,12 @@
 		line-height: 50rpx;
 		font-size: 28rpx;
 		color: #aaaaaa;
+	}
+	.h5{
+		text-align: right;
+		font-size: 20rpx;
+		margin-right: 20rpx;
+		font-weight: 500;
+		color: rgb(181, 14, 3);
 	}
 </style>
