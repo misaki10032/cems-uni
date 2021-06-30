@@ -171,7 +171,16 @@
 				"navigationBarTitleText": "充值中心"
 			}
 		}
-	],
+	    ,{
+            "path" : "pages/friend/attention/attention",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的关注",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
 	"globalStyle": {
 		"navigationBarTextStyle": "white", //  导航字体颜色   仅支持black / white

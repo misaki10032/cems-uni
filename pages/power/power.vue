@@ -3,7 +3,7 @@
 		<view class="header">
 			<view class="bg">
 				<view class="box">
-					<view class="box-hd" style="background-color: #b50e03">
+					<view class="box-hd">
 						<view class="avator">
 							<img src="https://img0.baidu.com/it/u=3311900507,1448170316&fm=26&fmt=auto&gp=0.jpg">
 						</view>
@@ -12,35 +12,35 @@
 			</view>
 		</view>
 
-		<uni-row style="text-align: center;">
-			<uni-col :span="24" style="width: 650rpx;background-color: #FFFFFF;border-radius: 35rpx;margin: 20rpx 50rpx;" >
-				<uni-col :span="24" style="border-bottom: 1rpx solid #d4d4d4;padding: 10rpx;">
-					<uni-col :span="7" style="text-align: right;">
+		<uni-row class="row_01">
+			<uni-col :span="24" class="col_01" >
+				<uni-col :span="24" class="col_01_01">
+					<uni-col :span="7" class="col_01_01_01">
 						<uni-icons type="person"></uni-icons>
 					</uni-col>
-					<uni-col :span="16" :offset="1" style="text-align: left;">
-						<text style="text-align: left;">昵称&nbsp;:&nbsp;{{ user.userPname }}</text>
+					<uni-col :span="16" :offset="1" class="col_01_01_02">
+						<text>昵称&nbsp;:&nbsp;{{ user.userPname }}</text>
 					</uni-col>	
 				</uni-col>
-				<uni-col :span="24" style="border-bottom: 1rpx solid #d4d4d4;padding: 20rpx;" >
-					<uni-col :span="7" style="text-align: right;">
+				<uni-col :span="24" class="col_01_02" >
+					<uni-col :span="7" class="text_right">
 						<uni-icons type="paperclip"></uni-icons>
 					</uni-col>
-					<uni-col :span="16" :offset="1" style="text-align: left;">
-						<text style="text-align: left;">权限&nbsp;:&nbsp;{{ user.userRole }}</text>
+					<uni-col :span="16" :offset="1" class="text_left">
+						<text class="text_left">权限&nbsp;:&nbsp;{{ user.userRole }}</text>
 					</uni-col>
 				</uni-col>
-				<uni-col :span="24" style="padding: 10rpx;">
-					<uni-col :span="7" style="text-align: right;">
+				<uni-col :span="24" class="col_01_03">
+					<uni-col :span="7" class="text_right">
 						<uni-icons type="cart"></uni-icons>
 					</uni-col>
-					<uni-col :span="16" :offset="1" style="text-align: left;">
-						<text style="text-align: left;">余额&nbsp;:&nbsp;{{ user.userMoney }}</text>
+					<uni-col :span="16" :offset="1" class="text_left">
+						<text class="text_left">余额&nbsp;:&nbsp;{{ user.userMoney }}</text>
 					</uni-col>
 				</uni-col>
 			</uni-col>
 			<uni-col :span="20" :offset="2">
-				<button type="primary" style="border-radius: 35rpx;" @click="open">
+				<button type="primary" @click="open">
 					升级权限
 				</button>
 			</uni-col>
@@ -170,7 +170,45 @@
 		background-color: #f1f1f1;
 		font-size: 30upx;
 	}
-
+	button{
+		border-radius: 60rpx;
+	}
+	.row_01{
+		text-align: center;
+	
+	}
+	.col_01{
+		width: 650rpx;
+		background-color: #FFFFFF;
+		border-radius: 35rpx;
+		margin: 20rpx 50rpx;
+	}
+	.col_01_01{
+		border-bottom: 1rpx solid #d4d4d4;
+		padding: 10rpx;
+	}
+	.col_01_01_01{
+		text-align: right;
+	}
+	.col_01_01_02{
+		text-align: left;
+		text{
+			text-align: left;
+		}
+	}
+	.col_01_02{
+		border-bottom: 1rpx solid #d4d4d4;
+		padding: 20rpx;
+	}
+	.col_01_03{
+		padding: 10rpx;
+	}
+	.text_right{
+		text-align: right;
+	}
+	.text_left{
+		text-align: left;
+	}
 	.header {
 		background: #fff;
 		height: 190upx;
@@ -215,6 +253,7 @@
 			flex-wrap: wrap;
 			flex-direction: row;
 			justify-content: center;
+			background-color: #b50e03;
 
 			.avator {
 				width: 160upx;

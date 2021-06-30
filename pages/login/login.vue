@@ -49,10 +49,12 @@
 			getUserPosition(userId){
 				var that = this;
 				uni.getLocation({
-					type:'gcj02',
-					geocode:true,
+					type:'wgs84',
+					// geocode:true,
 					success: function (res) {
-						var add = ""+res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						// var add = ""+res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						// that.position.userAddress = add;
+						var add = "user"+userId+"的详细信息"
 						that.position.userAddress = add;
 						that.position.userLatitude = res.latitude;
 						that.position.userLongitude = res.longitude;

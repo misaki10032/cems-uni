@@ -1,6 +1,6 @@
 <template>
 	<view style="background-color: #f7f7f7;">
-		<uni-row v-for="(item,index) in info" :key="index" style="margin-top: 20rpx;background-color: #fff;">
+		<uni-row v-for="(item,index) in info" :key="index" style="margin-top: 20rpx;background-color: #ffffff;">
 			<uni-col :span="4">
 				<view v-if="item.userSex=='男'">
 					<image class="user_image" style="border-radius: 30px;"
@@ -114,10 +114,10 @@
 			getUserPosition(userId){
 				var that = this;
 				uni.getLocation({
-					type:'gcj02',
-					geocode:true,
+					type:'wgs84',
 					success: function (res) {
-						var add = res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						//var add = res.address.country+res.address.province+res.address.city+res.address.district+res.address.street+res.address.streetNum
+						var add = "user"+userId+"的详细信息";
 						that.position.userAddress = add;
 						that.position.userLatitude = res.latitude;
 						that.position.userLongitude = res.longitude;
