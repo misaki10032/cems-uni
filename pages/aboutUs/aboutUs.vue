@@ -29,7 +29,7 @@
 		methods: {
 			callPhone() {
 				uni.makePhoneCall({
-          phoneNumber: "136-1912-6257"
+          phoneNumber: "13619126257"
         })
 			}
 		}
