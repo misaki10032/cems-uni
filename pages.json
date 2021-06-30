@@ -182,13 +182,20 @@
         }
         ,{
             "path" : "pages/friend/fans/fans",
-            "style" :                                                                                    
+            "style" :
             {
                 "navigationBarTitleText": "我的粉丝",
                 "enablePullDownRefresh": false
             }
-            
+
         }
+        },
+		{
+				"path": "pages/friend/friendInfo",
+				"style": {
+					"navigationBarTitleText": "个人资料"
+				}
+		}
     ],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
 	"globalStyle": {

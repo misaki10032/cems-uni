@@ -78,6 +78,13 @@
 					})
 					return
 				}
+				if(money == 0){
+					uni.showToast({
+						title:"不可以充值0元哦!",
+						icon:"none"
+					})
+					return
+				}
 				this.payMoney = money
 				this.content = "您确定要充值" + this.payMoney + "?"
 				this.open()
@@ -100,7 +107,7 @@
 		}
 		
 		.money_btn {
-			margin: 60rpx 30rpx;
+			margin: 20rpx 30rpx;
 			height: 160rpx;
 			padding: 35rpx 20rpx;
 			border-radius: 20rpx;
