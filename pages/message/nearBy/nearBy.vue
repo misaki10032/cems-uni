@@ -60,6 +60,7 @@
 				this.$refs.popup.close()
 			},
 			confirm() {
+				var that = this;
 				this.$myRequest({
 					url: '/addFriend',
 					data: {
@@ -69,17 +70,22 @@
 					method: 'GET',
 					dataType: 'json',
 					success: (res) => {
-						uni.showToast({
-							title: res.data.msg,
-							icon: "none"
-						})
+						if(res.data.code==200){
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+							var foucs = uni.getStorageSync("foucs")
+							uni.setStorageSync("foucs",foucs+1)
+							that.$refs.popup.close()
+						}else{
+							uni.showToast({
+								title: res.data.msg,
+								icon: "none"
+							})
+						}
 					}
 				});
-				uni.showToast({
-					title: "成功关注 : 用户 " + this.attentionId,
-					icon: "none"
-				})
-				this.$refs.popup.close()
 			},
 			getOtherPeople(){
 				this.$myRequest({

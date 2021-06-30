@@ -134,6 +134,8 @@
 							console.log(token);
 							uni.setStorageSync('token', token);
 							uni.setStorageSync('loginUser', res.data.loginUser);
+							uni.setStorageSync('fans', res.data.fans);
+							uni.setStorageSync('foucs', res.data.foucs);
 							this.getUserPosition(res.data.loginUser.userId);
 							setTimeout(() => {
 								uni.showToast({

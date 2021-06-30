@@ -24,7 +24,7 @@
 			
 			<view class="friend-info-body-other">
 				<uni-icons type="person" size="12"></uni-icons>
-				<text>{{user.userName}} | 22岁 | {{user.userBirth}} | {{user.userSex}} | {{user.userHouse}}</text>
+				<text>{{user.userName}} | {{user.userBirth | formatAge}} | {{user.userBirth | formatDate}} | {{user.userSex}} | {{user.userHouse}}</text>
 			</view>
 			<view class="friend-info-body-other">
 				<uni-icons type="email" size="12"></uni-icons>
@@ -149,6 +149,22 @@
 					}
 				})
 			}
+		},
+		filters: {
+			formatAge: function(age){
+				var date = new Date(age).getFullYear()
+				var curDate = new Date().getFullYear()
+				return (curDate - date) + "岁"
+			},
+			formatDate: function(value) {
+				var date = new Date(value);
+				var year = date.getFullYear();
+				var month = date.getMonth() + 1;
+				var day = date.getDate();
+				month = month > 9 ? month : '0' + month;
+				day = day > 9 ? day : '0' + day;
+				return `${year}-${month}-${day}`;
+			 }
 		}
 	}
 </script>

@@ -105,6 +105,8 @@
 			}
 			this.money = user.userMoney;
 			this.nav[3].num = user.userMoney+".00";
+			this.nav[0].num = uni.getStorageSync("foucs")
+			this.nav[1].num = uni.getStorageSync("fans")
 			if (user.userRole == 'complete') {
 				user.userRole = "委托人";
 			} else {
