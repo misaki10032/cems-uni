@@ -1,25 +1,27 @@
 <template>
 	<view class="fixforpc-window">
-		
-		<view style="text-align: right;height: 80rpx;margin-top: 5px;"  class="sticky-top"> 
-		<button v-show=!bol v-if="more_dis" class="mini-btn" type="default"  @click="enter1" size="mini">编辑</button>
-		<button v-show=bol v-if="more_dis" class="mini-btn" type="primary" size="mini" @click="ent">取消</button>
-	
-		<button v-show=bol v-if="more_dis" class="mini-btn" type="warn" size="mini" @click="enter">删除</button>
-		<button class="mini-btn" v-show=bol v-if="more_dis" type="warn"  @click="enter2"  size="mini">清空</button>
-			</view>
+		<view style="text-align: right;height: 80rpx;margin-top: 5px;" class="sticky-top">
+			<button v-show=!bol v-if="more_dis" class="mini-btn" type="default" @click="enter1" size="mini">编辑</button>
+			<button v-show=bol v-if="more_dis" class="mini-btn" type="primary" size="mini" @click="ent">取消</button>
+			<button v-show=bol v-if="more_dis" class="mini-btn" type="warn" size="mini" @click="enter">删除</button>
+			<button class="mini-btn" v-show=bol v-if="more_dis" type="warn" @click="enter2" size="mini">清空</button>
+		</view>
 		<view class="example-body">
 			<view class="li" v-for="(hm,index) in hotTasks" :key="index">
-				<view v-show="hm.del" class="uni-flex uni-row" style="-webkit-justify-content: space-between;justify-content: space-between;">
+				<view v-show="hm.del" class="uni-flex uni-row"
+					style="-webkit-justify-content: space-between;justify-content: space-between;">
 					<view class="text1">
 						{{hm.userTime}}
 					</view>
 					<view class="text" style="height: 25px;">
-						<img v-show=!bol style="height: 20px;"  @click="open($event, index)"  src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51miz.com%2FElement%2F00%2F77%2F33%2F81%2F67a33f27_E773381_b27076b6.png%21%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue%2Fformat%2Fpng&refer=http%3A%2F%2Fimg.51miz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627560227&t=d701662f90469b1c523945f47a250969">
-						<checkbox style="height: 20px;" v-show=bol :value='hm.id' :checked="hm.check" @click="checkBox($event, index)"></checkbox>
+						<img v-show=!bol style="height: 20px;" @click="open($event, index)"
+							src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.51miz.com%2FElement%2F00%2F77%2F33%2F81%2F67a33f27_E773381_b27076b6.png%21%2Fquality%2F90%2Funsharp%2Ftrue%2Fcompress%2Ftrue%2Fformat%2Fpng&refer=http%3A%2F%2Fimg.51miz.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1627560227&t=d701662f90469b1c523945f47a250969">
+						<checkbox style="height: 20px;" v-show=bol :value='hm.id' :checked="hm.check"
+							@click="checkBox($event, index)"></checkbox>
 					</view>
 				</view>
-				<uni-notice-bar v-show="hm.del" color="#9999AA" width="800rpx" backgroundColor="#F7F7F7" :text='hm.userMessage' />
+				<uni-notice-bar v-show="hm.del" color="#9999AA" width="800rpx" backgroundColor="#F7F7F7"
+					:text='hm.userMessage' />
 			</view>
 			<button v-if="more_dis" class="btn" size="mini" type="default" @click="moreTask">加载更多</button>
 			<view v-if="over_dis" class="over">
@@ -56,7 +58,7 @@
 			checkBox(e, item) {
 				this.hotTasks[item].check = !this.hotTasks[item].check
 			},
-			ent(){
+			ent() {
 				this.bol = !this.bol
 			},
 			enter1() {
@@ -70,20 +72,21 @@
 					cancelColor: "red",
 					success: function(res) {
 						if (res.confirm) {
-						that.$myRequest({
-							url: "/delSysMessageByUid?pageIndex=" + 1 + "&pageSize=" + 8 + "&id=" + uni
-								.getStorageSync("loginUser").userId,
-							method: "GET",
-							success: (res) => {
-								console.log(res)
-								that.hotTasks = res.data.data
-								that.total = res.data.total
-								uni.showToast({
-									title: "清空成功",
-									icon: 'none'
-								})
-							}
-						})
+							that.$myRequest({
+								url: "/delSysMessageByUid?pageIndex=" + 1 + "&pageSize=" + 8 + "&id=" +
+									uni
+									.getStorageSync("loginUser").userId,
+								method: "GET",
+								success: (res) => {
+									console.log(res)
+									that.hotTasks = res.data.data
+									that.total = res.data.total
+									uni.showToast({
+										title: "清空成功",
+										icon: 'none'
+									})
+								}
+							})
 						} else if (res.cancel) {
 							uni.showToast({
 								title: "取消了",
@@ -105,32 +108,32 @@
 				if (this.serverData.length === 0) {
 					return false
 				}
-				
+
 				uni.showModal({
 					title: "删除",
 					content: "您确定要删除消息吗？",
 					cancelColor: "red",
 					success: function(res) {
 						if (res.confirm) {
-						that.hotTasks.forEach(item => {
-							if (item.check == true) {
-								item.del = false
-							}
-						});
-						this.$myRequest({
-							url: "/delSysMessage?pageIndex=" + 1 + "&pageSize=" + 8 + "&id=" + uni
-								.getStorageSync("loginUser").userId + "&mid=" + this.serverData,
-							method: "GET",
-							success: (res) => {
-								console.log(res)
-								this.hotTasks = res.data.data
-								this.total = res.data.total
-							}
-						})
-						uni.showToast({
-							title: "删除成功",
-							icon: 'none'
-						})
+							that.hotTasks.forEach(item => {
+								if (item.check == true) {
+									item.del = false
+								}
+							});
+							this.$myRequest({
+								url: "/delSysMessage?pageIndex=" + 1 + "&pageSize=" + 8 + "&id=" + uni
+									.getStorageSync("loginUser").userId + "&mid=" + this.serverData,
+								method: "GET",
+								success: (res) => {
+									console.log(res)
+									this.hotTasks = res.data.data
+									this.total = res.data.total
+								}
+							})
+							uni.showToast({
+								title: "删除成功",
+								icon: 'none'
+							})
 						} else if (res.cancel) {
 							uni.showToast({
 								title: "取消了",
@@ -151,7 +154,7 @@
 					success: function(res) {
 						if (res.confirm) {
 							that.hotTasks[item].del = false;
-								that.$myRequest({
+							that.$myRequest({
 								url: "/delOneSysMessage?mid=" + item,
 								method: "GET",
 								success: (res) => {
@@ -160,7 +163,7 @@
 										icon: 'none'
 									})
 								}
-								}) 
+							})
 						} else if (res.cancel) {
 							uni.showToast({
 								title: "取消了",
@@ -192,7 +195,8 @@
 			},
 			getTasks(callback) {
 				this.$myRequest({
-					url: "/getAllSysMessage?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize + "&id=" + uni
+					url: "/getAllSysMessage?pageIndex=" + this.pageIndex + "&pageSize=" + this.pageSize + "&id=" +
+						uni
 						.getStorageSync("loginUser").userId,
 					method: "GET",
 					success: (res) => {
@@ -256,14 +260,16 @@
 		bottom: 0;
 		/* #endif */
 	}
-    	.sticky-top{
-    		position: sticky;
-    		top: 10rpx;
-    		left: 0;
-    		right: 0;
-    		width: 100%;
-    		z-index: 1;
-    	}
+
+	.sticky-top {
+		position: sticky;
+		top: 10rpx;
+		left: 0;
+		right: 0;
+		width: 100%;
+		z-index: 1;
+	}
+
 	.btn {
 		margin-left: 295rpx;
 	}
@@ -287,7 +293,8 @@
 		width: 360rpx;
 		color: black;
 	}
+
 	.mini-btn {
-	    margin-right: 10rpx;
+		margin-right: 10rpx;
 	}
 </style>
