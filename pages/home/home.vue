@@ -71,12 +71,12 @@
 					}
 				],
 				nav: [{
-						"title": "我关注的",
+						"title": "我的关注",
 						"num": 0,
-						"url": "/pages/home/currentMenu/attention/attention"
+						"url": "/pages/friend/attention/attention"
 					},
 					{
-						"title": "被关注",
+						"title": "粉丝",
 						"num": 0,
 						"url": "/pages/home/currentMenu/unattention/unattention"
 					},

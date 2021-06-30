@@ -1,0 +1,231 @@
+<template>
+	<view class="friend-info">
+		<view class="friend-info-pics" @click="choosePicsImg">
+			<image :src="pics"></image>
+		</view>
+		<view class="friend-info-head">
+			<view class="friend-info-head-img">
+				<image src="https://img1.baidu.com/it/u=1993408415,981167132&fm=26&fmt=auto&gp=0.jpg"></image>
+			</view>
+			<view class="friend-info-head-info">
+				<view class="friend-info-head-info-main">
+					<text>昵称: 大马猴</text>
+				</view>
+				<view class="friend-info-head-info-main">
+					<text>账号: 13619126257</text>
+				</view>
+				<view class="friend-info-head-info-handup" @click="plus">
+					<uni-icons type="hand-thumbsup"></uni-icons>  
+					<text>{{num}}</text>
+				</view>
+			</view>
+		</view>
+		<view class="friend-info-body">
+			
+			<view class="friend-info-body-other">
+				<uni-icons type="person" size="12"></uni-icons>
+				<text>男 | 22岁 | 3月12 | IT | 陕西省汉中市汉台区陕西理工大学</text>
+			</view>
+			<view class="friend-info-body-other">
+				<uni-icons type="email" size="12"></uni-icons>
+				<text>1069664381@qq.con</text>
+			</view>
+			<view class="friend-info-body-other">
+				<uni-icons type="chatbubble" size="12"></uni-icons>
+				<text>此用户很懒，什么都没有写</text>
+			</view>
+		</view>
+		<text @click="plusImg">添加图片</text>
+		<view class="friend-info-tail">
+			<view class="friend-info-tail-chooseImg">
+				<view class="friend-info-tail-chooseImg-tips" @click="plusImg" v-if="tipsFlag">
+					<uni-icons type="plusempty"></uni-icons>
+					<text>展示最好的自己</text>
+				</view>
+				<view class="friend-info-tail-chooseImg-pics">
+					<image :src="img" v-for="(img,index) in imgs" :key="index" @click="previewImg(img)"></image>
+				</view>
+			</view>
+		</view>
+		
+		<view class="friend-info-btn"> 
+			<button @click="toGift" type="warn">赠送礼物</button>
+			<button @click="toMsg" type="primary">发送消息</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				num : 3425,
+				pics: "https://img0.baidu.com/it/u=2311798355,2458925153&fm=26&fmt=auto&gp=0.jpg",
+				tipsFlag: true,
+				imgs: [],
+				user: {}
+			}
+		},
+		onLoad(options) {
+			this.getUserById(options.id)
+		},
+		methods: {
+			plus(){
+				let count = 0
+				count++
+				if(count == 10){
+					setTimeout(() => {
+						uni.showToast({
+							title: "您每天只能给10个人点赞",
+							icon: "none"
+						})
+					},24*60*1000)
+					return
+				}
+				this.num++
+			},
+			toGift(){
+				
+			},
+			toMsg() {
+				
+			},
+			getUserById(id){
+				this.$myRequest({
+					url: "/",
+					method: "POST",
+					success: res => {
+						this.user = res.data.user
+					}
+				})
+			},
+			plusImg(){
+				uni.chooseImage({
+					count: 9,
+					success: res => {
+						console.log(res)
+						this.imgs = res.tempFilePaths
+						uni.showToast({
+							title: "上传成功",
+							icon: "success"
+						})
+						this.tipsFlag = !this.tipsFlag
+					}
+				})
+			},
+			previewImg(current){
+				const urls = this.imgs.map(item => {
+					return item
+				})
+				uni.previewImage({
+					current,
+					urls
+				})
+			},
+			choosePicsImg() {
+				uni.chooseImage({
+					count: 1,
+					success: res => {
+						uni.showLoading({
+							title: "正在加载"
+						})
+						setTimeout(() => {
+							uni.showToast({
+								title: "更换成功",
+								icon: "success"
+							})
+						},300)
+						uni.hideLoading()
+						this.pics = res.tempFilePaths
+					}
+				})
+			}
+		}
+	}
+</script>
+
+<style lang="scss">
+	.friend-info{
+		width: 750rpx;
+		.friend-info-pics{
+			width: 750rpx;
+			height: 380rpx;
+			image{
+				width: 750rpx;
+				height: 100%;
+			}
+		}
+		.friend-info-head{
+			margin: 30rpx;
+			display: flex;
+			padding-bottom: 20rpx;
+			border-bottom: 1rpx solid #eee;
+			.friend-info-head-img{
+				image{
+					width: 100rpx;
+					height: 100rpx;
+					border-radius: 50rpx;
+				}
+			}
+			.friend-info-head-info{
+				margin-left: 40rpx;
+				.friend-info-head-info-main{
+					
+				}
+				.friend-info-head-info-handup{
+					position: fixed;
+					top: 420rpx;
+					right: 100rpx;
+				}
+			}
+		}
+		.friend-info-body{
+			margin: 30rpx;
+			padding-bottom: 20rpx;
+			border-bottom: 1rpx solid #eee;
+			.friend-info-body-other{
+				margin-top: 20rpx;
+				font-size: 24rpx;
+				text{
+					margin-left: 15rpx;
+				}
+			}
+		}
+		text{
+			margin-left: 30rpx;
+			font-size: 25rpx;
+		}
+		.friend-info-tail{
+			margin: 10rpx 30rpx 24rpx 30rpx;
+			width: 690rpx;
+			height: 550rpx;
+			border: 1rpx solid #eee;
+			.friend-info-tail-chooseImg{
+				width: 100%;
+				.friend-info-tail-chooseImg-tips{
+					text-align: center;
+					padding-top: 270rpx;
+				}
+				.friend-info-tail-chooseImg-pics{
+					width: 100%;
+					height: 100%;
+					display: flex;
+					flex-wrap: wrap;
+					box-sizing: border-box;
+					image{
+						width: 226rpx;
+						padding: 2rpx;
+						height: 180rpx;
+					}
+				}
+			}
+		}
+		.friend-info-btn{
+			margin: 0rpx 30rpx;
+			display: flex;
+			button{
+				width: 50%;
+			}
+		}
+	}
+</style>
