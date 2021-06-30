@@ -49,7 +49,7 @@
 		</view>
 		
 		<view class="friend-info-btn"> 
-			<button @click="toGift" type="warn">赠送礼物</button>
+			<button @click="callit" type="warn">语音通话</button>
 			<button @click="toMsg" type="primary">发送消息</button>
 		</view>
 	</view>
@@ -89,8 +89,10 @@
 				}
 				this.num++
 			},
-			toGift(){
-				
+			callit(){
+				uni.makePhoneCall({
+					phoneNumber:this.user.userPhone
+				})
 			},
 			toMsg() {
 				
