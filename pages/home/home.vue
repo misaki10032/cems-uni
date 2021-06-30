@@ -51,7 +51,7 @@
 				money:0,
 				menu: [{
 						"title": "我的帖子",
-						"url": "/pages/aboutUs/aboutUs"
+						"url": "/pages/myPost/myPost"
 					},
 					{
 						"title": "我的评论",

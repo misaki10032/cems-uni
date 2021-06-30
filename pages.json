@@ -170,6 +170,12 @@
 			"style": {
 				"navigationBarTitleText": "充值中心"
 			}
+		},
+		{
+			"path": "pages/myPost/myPost",
+			"style": {
+				"navigationBarTitleText": "我的帖子"
+			}
 		}
 	],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
