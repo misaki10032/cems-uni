@@ -170,6 +170,12 @@
 			"style": {
 				"navigationBarTitleText": "充值中心"
 			}
+		},
+		{
+			"path": "pages/myPost/myPost",
+			"style": {
+				"navigationBarTitleText": "我的帖子"
+			}
 		}
 	    ,{
             "path" : "pages/friend/attention/attention",
