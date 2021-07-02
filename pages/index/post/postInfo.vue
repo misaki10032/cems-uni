@@ -6,6 +6,8 @@
 					<text>
 						{{post.foTitle}}
 					</text>
+				</view>
+				<view class="post-name-info">
 					<text>
 						{{post.auserName}}
 					</text>
@@ -40,7 +42,7 @@
 								</view>
 								<view class="post-body-people-title">
 									<text>{{commen.cgmtCreate}}</text>
-									<text @click="addReply(commen.cid,commen.cuserId)">回复</text>
+									<text @click="addReply(commen.cid,commen.cuserId)"><uni-icons type="paperplane"></uni-icons>回复</text>
 								</view>
 							</view>
 						</view>
@@ -50,18 +52,22 @@
 						<view class="post-body-info-more" v-if="commen.replies.length != 0">
 							<uni-collapse accordion="true">
 								<uni-collapse-item title="查看更多">
-									<view class="more" v-for="recommen in commen.replies">
+									<view class="more" v-for="(recommen,index) in commen.replies" :key="index">
 										<view class="post-info-head">
 											<view class="post-body-info-img">
 												<image src="https://img0.baidu.com/it/u=3353211517,995971476&fm=26&fmt=auto&gp=0.jpg"></image>
 											</view>
 											<view class="post-body-people">
 												<view class="post-body-people-title">
-													<text>{{recommen.rcommuserName}}  回复 {{recommen.commReUserName}}</text>
+													<text>
+														{{recommen.rcommuserName}}<uni-icons type="paperplane"></uni-icons>{{recommen.commReUserName}}
+													</text>
 												</view>
 												<view class="post-body-people-title">
 													<text>{{recommen.rgmtCreate}}</text>
-													<text @click="addReply(commen.cid,recommen.rcommuser)">回复</text>
+													<text @click="addReply(commen.cid,recommen.rcommuser)">
+														<uni-icons type="paperplane"></uni-icons>回复
+													</text>
 												</view>
 											</view>
 										</view>
@@ -125,6 +131,13 @@
 				this.$refs.popup.close()
 			},
 			addReply(cid,uid){
+				var user = uni.getStorageSync("loginUser");
+				if (user == null || user == "" || user.userPname == null || user.userPname == "") {
+				  uni.navigateTo({
+					url: "/pages/login/login"
+				  })
+				  return
+				}
 				this.incid = cid
 				this.inuid = uid
 				this.open()
@@ -147,6 +160,13 @@
 				})
 			},
 			addComment(){
+				var user = uni.getStorageSync("loginUser");
+				if (user == null || user == "" || user.userPname == null || user.userPname == "") {
+				  uni.navigateTo({
+					url: "/pages/login/login"
+				  })
+				  return
+				}
 				if(this.data == null || this.data == undefined || this.data == ""){
 					uni.showToast({
 						title: "评论为空空，合理吗? en",
@@ -182,7 +202,6 @@
 				})
 			},
 			addReplys(){
-				console.log(this.incid)
 				if(this.reply.commReData == null || this.reply.commReData == undefined || this.reply.commReData == ""){
 					uni.showToast({
 						title: "评论为空空，合理吗? en",
@@ -241,6 +260,9 @@
 						font-size: 25rpx;
 					}
 				}
+				.post-name-info{
+					text-align: center;
+				}
 				.post-title-info{
 					text-align: center;
 				}
@@ -260,7 +282,7 @@
 						width: 100rpx;
 						height: 100rpx;
 						image {
-							width: 100%;
+							width: 100rpx;
 							height: 100%;
 							border-radius: 50rpx;
 							margin-top: -400rpx;
@@ -296,7 +318,7 @@
 							margin-top: 0rpx;
 							view:nth-child(1){
 								text{
-									color: #007AFF;
+									color: #003e81;
 								}
 							}
 							.post-body-people-title{
@@ -306,14 +328,14 @@
 								}
 								text:nth-child(2){
 									margin-right: 40rpx;
-									color: #4335D6;
+									color: #221b6f;
 								}
 							}
 						}
 					}
 					.post-body-info-body{
 						margin-left: 140rpx;
-						color: #09BB07;
+						color: #057404;
 						height: auto;
 					}
 					.post-body-info-more{

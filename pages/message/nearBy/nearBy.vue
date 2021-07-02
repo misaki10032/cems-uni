@@ -48,10 +48,6 @@
 		},
 		onLoad(){
 			this.getUserPosition(this.position.userId);
-			
-			setTimeout(res=>{
-				this.getOtherPeople();
-			},6000);
 		},
 		methods: {
 			toNearHome(id){

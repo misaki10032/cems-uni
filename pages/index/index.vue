@@ -74,19 +74,18 @@
 				})
 			},
 			openOne(){
-			uni.showModal({
-				title: '系统消息',
-				content: this.message,
-				showCancel: false,
-				confirmText: '确定'
-			});
-
+				uni.showModal({
+					title: '系统消息',
+					content: this.message,
+					showCancel: false,
+					confirmText: '确定'
+				});
 			},
-      toPostInfo(id){
-        uni.navigateTo({
-          url: "/pages/index/post/postInfo?id=" + id
-        })
-      },
+		    toPostInfo(id){
+				uni.navigateTo({
+				  url: "/pages/index/post/postInfo?id=" + id
+				})
+		    },
 			getMore(){
 				uni.showToast({
 					title: '点击查看更多',

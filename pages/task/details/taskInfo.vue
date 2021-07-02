@@ -89,7 +89,7 @@
 					uni.hideLoading()
 					return
 				}
-				let userId = user.id
+				let userId = uni.getStorageSync("loginUser").userId
 				console.log(userId)
 				console.log(taskId)
 				this.$myRequest({

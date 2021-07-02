@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import tasks from '../../../components/task_list/user_task_list.vue'
+	import tasks from '../../../components/task_list/user_ent_list.vue'
 
 	export default {
 		data() {

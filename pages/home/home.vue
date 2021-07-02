@@ -54,6 +54,10 @@
 						"url": "/pages/myPost/myPost"
 					},
 					{
+						"title": "我的委托",
+						"url": "/pages/message/myTask/myEntrust"
+					},
+					{
 						"title": "我的评论",
 						"url": "/pages/aboutUs/aboutUs"
 					},

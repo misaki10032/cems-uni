@@ -76,7 +76,9 @@
 								title: "确认成功",
 								icon: 'loading'
 							});
-							uni.navigateBack({});
+							uni.navigateTo({
+								url:"/pages/message/myTask/myEntrust"
+							})
 						} else if (res.data.code == 500) {
 							uni.showToast({
 								title: "服务器异常，稍后重试",

@@ -12,7 +12,6 @@
 			<view class="recommend_tasks_list_task_price">
 				<text>{{ task.entMoney | showPrice }}</text>
 				<text>{{ task.entPlan }}</text>
-				<text>{{ task.entState }}</text>
 			</view>
 		</view>
 	</view>
@@ -33,7 +32,7 @@
 		methods: {
 			toTaskInfo(id) {
 				uni.navigateTo({
-					url: "/pages/task/details/userTaskInfo?id=" + id
+					url: "/pages/task/details/taskInfo?id=" + id
 				})
 			}
 		},
@@ -105,9 +104,10 @@
 			/* 单子详情 */
 			.recommend_tasks_list_task_price {
 				text:nth-child(3) {
-					color: #7f7003;
+					color: #F55C23;
 					font-size: 25rpx;
-					text-align: center; //水平居中
+					justify-content: center; //水平居中
+					margin-left: 200rpx;
 				}
 
 			}
