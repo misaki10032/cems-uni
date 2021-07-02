@@ -200,6 +200,12 @@
 				"style": {
 					"navigationBarTitleText": "个人资料"
 				}
+		},
+		{
+			"path": "pages/index/post/postInfo",
+			"style": {
+				"navigationBarTitleText": "帖子详情"
+			}
 		}
     ],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。

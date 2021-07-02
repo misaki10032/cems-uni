@@ -8,26 +8,24 @@
 			</swiper-item>
 		</swiper>
 		<fab :content="content"></fab>
-		<view style="background-color: #F7F7F7;" v-for="(hm,index) in hotTasks" :key="index">
-		<uni-row v-show="hm.del" class="urow">
-			<uni-col :span="12">
-				<view class="h4">{{hm.foTitle}}</view>
-			</uni-col>
-			<uni-col :span="24">
-			<uni-notice-bar :show-get-more="true" color="#555666" background-color="white" :single="true"  :text='hm.foData' @getmore="getMore" />
-			
-			</uni-col>
-			<uni-col :span="24" >
-			<view  class="fb">{{hm.pname}}:{{hm.gmtCreate}}</view>
-			</uni-col>
-		</uni-row>
+		<view style="background-color: #F7F7F7;" v-for="(hm,index) in hotTasks" :key="index" @click="toPostInfo(hm.id)">
+			<uni-row v-show="hm.del" class="urow">
+				<uni-col :span="12">
+					<view class="h4">{{hm.foTitle}}</view>
+				</uni-col>
+				<uni-col :span="24">
+					<uni-notice-bar :show-get-more="true" color="#555666" background-color="white" :single="true" :text='hm.foData' @getmore="getMore" />
+				</uni-col>
+				<uni-col :span="24">
+					<view class="fb">{{hm.pname}}:{{hm.gmtCreate}}</view>
+				</uni-col>
+			</uni-row>
 		</view>
 		<button v-if="more_dis" class="btn" size="mini" type="default" @click="moreTask">加载更多</button>
 		<view v-if="over_dis" class="over">
 			-------我是有底线的-------
 		</view>
 	</view>
-
 </template>
 
 <script>
@@ -52,13 +50,11 @@
 					"https://img1.baidu.com/it/u=4067331960,3438608414&fm=26&fmt=auto&gp=0.jpg",
 					"https://img2.baidu.com/it/u=3012717581,3918222610&fm=26&fmt=auto&gp=0.jpg",
 					"https://img1.baidu.com/it/u=1182459655,2369734023&fm=26&fmt=auto&gp=0.jpg"
-				],				
-				content: [
-					{
-						text: "发贴",
-						iconPath: "https://img0.baidu.com/it/u=629864728,1240119482&fm=26&fmt=auto&gp=0.jpg"
-					}
-				]
+				],
+				content: [{
+					text: "发贴",
+					iconPath: "https://img0.baidu.com/it/u=629864728,1240119482&fm=26&fmt=auto&gp=0.jpg"
+				}]
 			}
 		},
 		onShow() {
@@ -75,10 +71,15 @@
 					url
 				})
 			},
-			getMore(){
+			toPostInfo(id){
+				uni.navigateTo({
+					url: "/pages/index/post/postInfo?id=" + id
+				})
+			},
+			getMore() {
 				uni.showToast({
 					title: '点击查看更多',
-					 icon: 'none'
+					icon: 'none'
 				})
 			},
 			getTasks(callback) {
@@ -223,33 +224,39 @@
 
 		}
 	}
-	.urow{
+
+	.urow {
 		margin: 10rpx;
 		background-color: white;
 	}
-.top{
-	margin: 20rpx;
-}
-.demo-uni-col {
-	height: 36px;
-	border-radius: 3px;
-	color: #545666;
-}
-.fb{
-	font-size: 20rpx;
-	text-align: right;
-	margin-left: 20rpx;
-}
-.h4{
-	    font-size: 35rpx;
+
+	.top {
+		margin: 20rpx;
+	}
+
+	.demo-uni-col {
+		height: 36px;
+		border-radius: 3px;
+		color: #545666;
+	}
+
+	.fb {
+		font-size: 20rpx;
+		text-align: right;
 		margin-left: 20rpx;
-	    font-weight: 500;
-	    color: rgb(181, 14, 3);
-}
-.img{
-	height: 40rpx;
-	margin-right: 10px;
-}
+	}
+
+	.h4 {
+		font-size: 35rpx;
+		margin-left: 20rpx;
+		font-weight: 500;
+		color: rgb(181, 14, 3);
+	}
+
+	.img {
+		height: 40rpx;
+		margin-right: 10px;
+	}
 
 	.btn {
 		margin-left: 295rpx;
@@ -263,7 +270,8 @@
 		font-size: 28rpx;
 		color: #aaaaaa;
 	}
-	.h5{
+
+	.h5 {
 		text-align: right;
 		font-size: 20rpx;
 		margin-right: 20rpx;
