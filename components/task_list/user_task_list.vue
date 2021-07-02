@@ -6,10 +6,13 @@
 				<text>{{ task.entData | showName }}</text>
 				<text>{{ task.entTypeId }}</text>
 			</view>
+
+
 			<!-- 单子价格 + 状态 -->
 			<view class="recommend_tasks_list_task_price">
 				<text>{{ task.entMoney | showPrice }}</text>
 				<text>{{ task.entPlan }}</text>
+				<text>{{ task.entState }}</text>
 			</view>
 		</view>
 	</view>
@@ -17,11 +20,15 @@
 
 <script>
 	export default {
+
 		props: [
 			"hotTasks"
 		],
 		data() {
-			return {}
+			return {
+				more_dis_0: true,
+				more_dis_1: true
+			}
 		},
 		methods: {
 			toTaskInfo(id) {
@@ -91,6 +98,17 @@
 					font-size: 25rpx;
 					position: absolute;
 					right: 30rpx;
+				}
+
+			}
+
+			/* 单子详情 */
+			.recommend_tasks_list_task_price {
+				text:nth-child(3) {
+					color: #F55C23;
+					font-size: 25rpx;
+					justify-content: center; //水平居中
+					margin-left: 200rpx;
 				}
 
 			}
