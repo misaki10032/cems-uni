@@ -34,6 +34,7 @@
 	export default {
 		data() {
 			return {
+				msgType: 'success',
 				pageIndex: 1,
 				pageSize: 8,
 				over_dis: false,
@@ -44,6 +45,7 @@
 				hotTasks: [],
 				array: ['全部', '已被接', '可接单', '已完成'],
 				index: 0,
+				message:"wqeqw",
 				rotationImgArr: [
 					"https://img2.baidu.com/it/u=2994123101,43895145&fm=26&fmt=auto&gp=0.jpg",
 					"https://img1.baidu.com/it/u=4189823403,3419626601&fm=26&fmt=auto&gp=0.jpg",
@@ -62,7 +64,7 @@
 			this.hotTasks = []
 			this.more_dis = true
 			this.over_dis = false
-			this.getTasks()
+			this.getTasks();
 		},
 		methods: {
 			/* 获取轮播图数据 */
@@ -71,15 +73,24 @@
 					url
 				})
 			},
-			toPostInfo(id){
-				uni.navigateTo({
-					url: "/pages/index/post/postInfo?id=" + id
-				})
+			openOne(){
+			uni.showModal({
+				title: '系统消息',
+				content: this.message,
+				showCancel: false,
+				confirmText: '确定'
+			});
+
 			},
-			getMore() {
+      toPostInfo(id){
+        uni.navigateTo({
+          url: "/pages/index/post/postInfo?id=" + id
+        })
+      },
+			getMore(){
 				uni.showToast({
 					title: '点击查看更多',
-					icon: 'none'
+					 icon: 'none'
 				})
 			},
 			getTasks(callback) {
@@ -90,6 +101,8 @@
 						console.log(res)
 						this.hotTasks = [...this.hotTasks, ...res.data.data]
 						this.total = res.data.total
+						this.message = res.data.str
+					    this.openOne()
 						callback && callback()
 					}
 				})
@@ -167,7 +180,17 @@
 			}
 		}
 	}
-
+	.popup-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		padding: 15px;
+		height: 50px;
+		background-color: #fff;
+	}
 
 	.cond {
 		margin: 30rpx 30rpx;
