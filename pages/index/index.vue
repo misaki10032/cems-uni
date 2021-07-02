@@ -22,7 +22,7 @@
 			</uni-col>
 		</uni-row>
 		</view>
-		<button v-if="more_dis" class="btn" size="mini" type="default" @click="moreTask">加载更多</button>
+		<button v-if="more_dis" class="btn" size="mini" type="default" @click="moreTask">加载更多</button>		
 		<view v-if="over_dis" class="over">
 			-------我是有底线的-------
 		</view>
@@ -36,6 +36,7 @@
 	export default {
 		data() {
 			return {
+				msgType: 'success',
 				pageIndex: 1,
 				pageSize: 8,
 				over_dis: false,
@@ -46,6 +47,7 @@
 				hotTasks: [],
 				array: ['全部', '已被接', '可接单', '已完成'],
 				index: 0,
+				message:"wqeqw",
 				rotationImgArr: [
 					"https://img2.baidu.com/it/u=2994123101,43895145&fm=26&fmt=auto&gp=0.jpg",
 					"https://img1.baidu.com/it/u=4189823403,3419626601&fm=26&fmt=auto&gp=0.jpg",
@@ -66,7 +68,7 @@
 			this.hotTasks = []
 			this.more_dis = true
 			this.over_dis = false
-			this.getTasks()
+			this.getTasks();
 		},
 		methods: {
 			/* 获取轮播图数据 */
@@ -74,6 +76,15 @@
 				uni.navigateTo({
 					url
 				})
+			},
+			openOne(){
+			uni.showModal({
+				title: '系统消息',
+				content: this.message,
+				showCancel: false,
+				confirmText: '确定'
+			});
+
 			},
 			getMore(){
 				uni.showToast({
@@ -89,6 +100,8 @@
 						console.log(res)
 						this.hotTasks = [...this.hotTasks, ...res.data.data]
 						this.total = res.data.total
+						this.message = res.data.str
+					    this.openOne()
 						callback && callback()
 					}
 				})
@@ -166,7 +179,17 @@
 			}
 		}
 	}
-
+	.popup-content {
+		/* #ifndef APP-NVUE */
+		display: flex;
+		/* #endif */
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		padding: 15px;
+		height: 50px;
+		background-color: #fff;
+	}
 
 	.cond {
 		margin: 30rpx 30rpx;
