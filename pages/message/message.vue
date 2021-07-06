@@ -2,18 +2,26 @@
 	<view>
 		<view class="nav">
 			<view class="nav_item" v-for="(item,index) in nav" :key="index" @click="toDetails(item.url)">
-
 				<view>
 					<image :src="item.icon" mode=""></image>
 				</view>
-
 				<text>{{item.title}}</text>
 			</view>
 		</view>
-		<view class="tip">
+<!-- 		<view class="tip">
 			<view v-if="msgs.length === 0">
 				<text>{{msg}}</text>
 			</view>
+		</view> -->
+		<view class="uni_chat" @click="toChat">
+			<uni-row>
+				<uni-col :span="2" :offset="2">
+					<image src="https://img0.baidu.com/it/u=3800488023,2420605444&fm=26&fmt=auto&gp=0.jpg"></image>
+				</uni-col>
+				<uni-col :span="12" :offset="4">
+					<view class="chat_name">cems多人聊天中心</view>
+				</uni-col>
+			</uni-row>
 		</view>
 	</view>
 
@@ -58,12 +66,35 @@
 				uni.navigateTo({
 					url
 				})
+			},
+			toChat(){
+				uni.navigateTo({
+					url:"../nettyChat/nettyChat"
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
+	.uni_chat{
+		padding: 20rpx;
+		background-color: #f4f4f4;
+		margin: 25rpx;
+		border-radius: 15rpx;
+		border: 1rpx solid #d1d1d1;
+		
+		image{
+			width: 120rpx;
+			height: 120rpx;
+			border-radius: 100rpx;
+			border: 1rpx solid #d1d1d1;
+		}
+		.chat_name{
+			margin-top: 40rpx;
+			font-size: 35rpx;
+		}
+	}
 	/* 导航 */
 	.nav {
 		display: flex;

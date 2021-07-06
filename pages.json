@@ -207,6 +207,15 @@
 				"navigationBarTitleText": "帖子详情"
 			}
 		}
+        ,{
+            "path" : "pages/nettyChat/nettyChat",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "CEMS聊天室",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	// 用于设置应用的状态栏、导航条、标题、窗口背景色等。
 	"globalStyle": {
